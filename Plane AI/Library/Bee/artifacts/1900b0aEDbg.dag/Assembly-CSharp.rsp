@@ -319,6 +319,9 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/PlaneController.cs"
+"Assets/Scripts/PlaneSight.cs"
+"Assets/Scripts/SteeringBehaviours/ObstacleAvoidance.cs"
+"Assets/Scripts/SteeringBehaviours/SteeringController.cs"
 -langversion:8.0
 
 /deterministic
