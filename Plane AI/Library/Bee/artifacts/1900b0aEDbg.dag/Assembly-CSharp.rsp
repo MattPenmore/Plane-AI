@@ -108,6 +108,11 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
+-r:"Assets/ProCore/ProBuilder/Classes/ClassesLib/KdTreeLib.dll"
+-r:"Assets/ProCore/ProBuilder/Classes/ClassesLib/pb_Stl.dll"
+-r:"Assets/ProCore/ProBuilder/Classes/ClassesLib/Poly2Tri.dll"
+-r:"Assets/ProCore/ProBuilder/Classes/ProBuilderCore-Unity5.dll"
+-r:"Assets/ProCore/ProBuilder/Classes/ProBuilderMeshOps-Unity5.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.1.22f1/Editor/Data/Managed/UnityEngine/UnityEditor.dll"
@@ -318,6 +323,12 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
+"Assets/ProCore/ProBuilder/API Examples/Icosphere FFT/Scripts/CameraControls.cs"
+"Assets/ProCore/ProBuilder/API Examples/Icosphere FFT/Scripts/IcoBumpin.cs"
+"Assets/ProCore/ProBuilder/API Examples/Misc/HueCube.cs"
+"Assets/ProCore/ProBuilder/API Examples/Procedural Mesh/ExtrudeRandomEdges.cs"
+"Assets/ProCore/ProBuilder/API Examples/Runtime Editing/RuntimeEdit.cs"
+"Assets/ProCore/ProBuilder/API Examples/Vertex Colors/HighlightNearestFace.cs"
 "Assets/Scripts/Pathfinding/Node.cs"
 "Assets/Scripts/Pathfinding/NodeCount.cs"
 "Assets/Scripts/Pathfinding/NodeGrid.cs"
