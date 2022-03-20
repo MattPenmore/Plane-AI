@@ -7,25 +7,64 @@ public class PlanePathfinding : MonoBehaviour
     [SerializeField]
     GameObject currentNode;
 
+    GameObject oldTarget = null;
+    public GameObject target;
+    public GameObject[] Path;
+    [SerializeField]
+    GameObject pathfind;
 
-    float timeToPathFind = 0.1f;
-    float timeUntilPathfind = 0.1f;
+    [SerializeField]
+    SteeringController controller;
+
+    public Vector3 seekForce;
+    float maxAccelleration = 50;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Path = new GameObject[500];
+        if (target && currentNode)
+        {
+            if (target.GetComponentInChildren<CheckPoint>())
+            {
+                if(target.GetComponentInChildren<CheckPoint>().connectedNode)
+                {
+                    Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
+                    oldTarget = target;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, currentNode.transform.position) > 25)
+        if(Vector3.Distance(transform.position, currentNode.transform.position) > 25 || oldTarget != target)
         {
             currentNode = FindCurrentNode();
-            timeUntilPathfind = timeToPathFind;
+            if (target && currentNode)
+            {
+                if (target.GetComponentInChildren<CheckPoint>())
+                {
+                    if (target.GetComponentInChildren<CheckPoint>().connectedNode)
+                    {
+                        Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
+                        oldTarget = target;
+                    }
+                }
+            }
         }
+        Vector3 seekDirection = new Vector3();
+        maxAccelleration = controller.maxAcceleration;
 
-
+        if (Path.Length <= 1)
+        {
+            seekDirection = (target.transform.position - transform.position).normalized * maxAccelleration;
+        }
+        else
+        {
+            seekDirection = (Path[1].transform.position - transform.position).normalized * maxAccelleration;
+        }
+        seekForce = seekDirection;
     }
 
     GameObject FindCurrentNode()

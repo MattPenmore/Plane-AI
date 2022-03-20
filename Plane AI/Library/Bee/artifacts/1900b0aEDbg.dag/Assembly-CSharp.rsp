@@ -329,6 +329,7 @@
 "Assets/ProCore/ProBuilder/API Examples/Procedural Mesh/ExtrudeRandomEdges.cs"
 "Assets/ProCore/ProBuilder/API Examples/Runtime Editing/RuntimeEdit.cs"
 "Assets/ProCore/ProBuilder/API Examples/Vertex Colors/HighlightNearestFace.cs"
+"Assets/Scripts/CheckPoint.cs"
 "Assets/Scripts/Pathfinding/Node.cs"
 "Assets/Scripts/Pathfinding/NodeCount.cs"
 "Assets/Scripts/Pathfinding/NodeGrid.cs"

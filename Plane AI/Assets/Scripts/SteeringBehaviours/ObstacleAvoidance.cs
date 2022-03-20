@@ -7,6 +7,11 @@ public class ObstacleAvoidance : MonoBehaviour
     [SerializeField]
     PlaneSight sight;
     float maxAccelleration = 50;
+    [SerializeField]
+    SteeringController controller;
+
+    [SerializeField]
+    float avoidanceStrength;
 
     public Vector3 avoidanceForce;
 
@@ -19,6 +24,7 @@ public class ObstacleAvoidance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        maxAccelleration = controller.maxAcceleration;
         Vector3 avoidanceDirection = new Vector3();
         if(sight.sightDirections.Count == 0)
         {
@@ -32,7 +38,7 @@ public class ObstacleAvoidance : MonoBehaviour
             //avoidanceDirection -= Quaternion.AngleAxis(90, transform.TransformDirection(Vector3.up)) * (objPos * (sight.maxSight - objPos.magnitude));
             float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
 
-            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight / angleToPoint - sight.sightDirections[i] / angleToPoint);
+            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight / angleToPoint - sight.sightDirections[i] / angleToPoint) * avoidanceStrength;
             i++;
         }
 

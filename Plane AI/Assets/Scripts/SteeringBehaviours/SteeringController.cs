@@ -8,6 +8,13 @@ public class SteeringController : MonoBehaviour
 
     [SerializeField]
     ObstacleAvoidance avoidance;
+    [SerializeField]
+    PlanePathfinding seek;
+
+    [SerializeField]
+    float seekRatio;
+    [SerializeField]
+    float avoidanceRatio;
     public float maxVelocity = 300;
     public float minVelocity = 50;
     private float minSpeed = 0;
@@ -17,10 +24,14 @@ public class SteeringController : MonoBehaviour
     public float turnSpeed = 20f;
 
     public Vector3 avoidanceForce;
+    public Vector3 seekForce;
     public Vector3 newDirection;
 
     public float curSpeed;
     public float angle;
+
+    [SerializeField]
+    float cutOffAngle;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +42,41 @@ public class SteeringController : MonoBehaviour
     void Update()
     {
         avoidanceForce = avoidance.avoidanceForce;
+        seekForce = seek.seekForce;
 
+        if(avoidanceForce.magnitude < maxAcceleration / 2)
+        {
+            avoidanceRatio = 0;
+        }
+        else
+        {
+            avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+        }
 
-        newDirection = rb.velocity + avoidanceForce;
+        seekRatio = 1 - avoidanceRatio;
+
+        newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
         angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
 
-        if (angle > 180)
-            angle -= 360;
-        if (angle < -180)
-            angle += 360;
 
-        if(angle > turnSpeed * Time.deltaTime)
+        //if (angle > 180)
+        //    angle -= 360;
+        //if (angle < -180)
+        //    angle += 360;
+
+        //Smooth to prevent jerking
+        if(angle < cutOffAngle && angle > -cutOffAngle)
         {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, turnSpeed / angle * Time.deltaTime, 0.0f) * newDirection.magnitude;
+            newDirection = rb.velocity + (rb.velocity.normalized * (avoidanceForce.magnitude * avoidanceRatio + seekForce.magnitude * seekRatio));
+        }
+
+        if(angle > (turnSpeed * Time.deltaTime))
+        {
+            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
         else if (angle < -turnSpeed * Time.deltaTime)
         {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, turnSpeed/ angle * Time.deltaTime, 0.0f) * newDirection.magnitude;
+            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
 
         if ((newDirection.magnitude - rb.velocity.magnitude) / Time.deltaTime > maxAcceleration)
