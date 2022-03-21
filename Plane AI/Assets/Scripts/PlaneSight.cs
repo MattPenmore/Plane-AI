@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlaneSight : MonoBehaviour
 {
     //int numRayCasts;
-    int numRayCastsWidth = 9;
-    int numRayCastsHeight = 5;
+    int numRayCastsWidth = 7;
+    int numRayCastsHeight = 3;
 
     [SerializeField]
     float sightWidth = 50;

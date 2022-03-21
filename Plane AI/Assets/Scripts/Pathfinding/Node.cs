@@ -23,14 +23,14 @@ public class Node : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(!controller.GetComponent<NodeGrid>().creatingGrid && !adjecentNodesKnown)
-        {
-            FindAdjacentNodes();
-            adjecentNodesKnown = true;
-        }
-    }
+    //void Update()
+    //{
+    //    if(!controller.GetComponent<NodeGrid>().creatingGrid && !adjecentNodesKnown)
+    //    {
+    //        FindAdjacentNodes();
+    //        adjecentNodesKnown = true;
+    //    }
+    //}
 
     public List<GameObject> FindAdjacentNodes()
     {

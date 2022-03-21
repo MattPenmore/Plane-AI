@@ -18,6 +18,7 @@ public class PlanePathfinding : MonoBehaviour
 
     public Vector3 seekForce;
     float maxAccelleration = 50;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,7 @@ public class PlanePathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, currentNode.transform.position) > 25 || oldTarget != target)
+        if(Vector3.Distance(transform.position, currentNode.transform.position) > 35 || oldTarget != target)
         {
             currentNode = FindCurrentNode();
             if (target && currentNode)

@@ -58,12 +58,6 @@ public class SteeringController : MonoBehaviour
         newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
         angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
 
-
-        //if (angle > 180)
-        //    angle -= 360;
-        //if (angle < -180)
-        //    angle += 360;
-
         //Smooth to prevent jerking
         if(angle < cutOffAngle && angle > -cutOffAngle)
         {
