@@ -32,6 +32,13 @@ public class SteeringController : MonoBehaviour
 
     [SerializeField]
     float cutOffAngle;
+
+    [SerializeField]
+    GameObject body;
+
+    [SerializeField]
+    float bodyRotateSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +48,8 @@ public class SteeringController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        avoidanceForce = avoidance.avoidanceForce;
-        seekForce = seek.seekForce;
+            avoidanceForce = avoidance.avoidanceForce;
+            seekForce = seek.seekForce;
 
         if(avoidanceForce.magnitude < maxAcceleration / 2)
         {
@@ -64,28 +71,35 @@ public class SteeringController : MonoBehaviour
             newDirection = rb.velocity + (rb.velocity.normalized * (avoidanceForce.magnitude * avoidanceRatio + seekForce.magnitude * seekRatio));
         }
 
-        if(angle > (turnSpeed * Time.deltaTime))
+        if(angle > (turnSpeed/* * Time.deltaTime*/))
         {
             newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
-        else if (angle < -turnSpeed * Time.deltaTime)
+        else
         {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
+            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
+        //else if (angle < -turnSpeed * Time.deltaTime)
+        //{
+        //    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
+        //}
 
         if ((newDirection.magnitude - rb.velocity.magnitude) / Time.deltaTime > maxAcceleration)
         {
             newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
         }
 
-        rb.velocity = newDirection;
-        if(rb.velocity.magnitude > maxVelocity)
+        if(newDirection.magnitude > maxVelocity)
         {
-            rb.velocity = rb.velocity.normalized * maxVelocity;
+            rb.velocity = newDirection.normalized * maxVelocity;
         }
-        else if(rb.velocity.magnitude < minVelocity)
+        else if(newDirection.magnitude < minVelocity)
         {
-            rb.velocity = rb.velocity.normalized * minVelocity;
+            rb.velocity = newDirection.normalized * minVelocity;
+        }
+        else
+        {
+            rb.velocity = newDirection;
         }
         curSpeed = rb.velocity.magnitude;
 
@@ -100,6 +114,17 @@ public class SteeringController : MonoBehaviour
         /* If we have a non-zero direction then look towards that direciton otherwise do nothing */
         if (direction.sqrMagnitude > 0.001f)
         {
+            Vector3 perp = Vector3.Cross(transform.forward, direction);
+            float dir = Vector3.Dot(perp, transform.up);
+
+            if(Mathf.Abs(dir) < 0.0005)
+            {
+                body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
+            }
+            else
+            {
+                body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0,Mathf.Clamp(-dir * 10000, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * 10000, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+            }
 
             transform.rotation = Quaternion.LookRotation(direction);
         }

@@ -314,3 +314,8 @@ C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\obj\Debug\Assembly-CSharp.cspro
 C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\obj\Debug\Assembly-CSharp.dll
 C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\Temp\Bin\Debug\KdTreeLib.dll
+C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\Temp\Bin\Debug\pb_Stl.dll
+C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\Temp\Bin\Debug\Poly2Tri.dll
+C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\Temp\Bin\Debug\ProBuilderCore-Unity5.dll
+C:\Users\Matt\Documents\GitHub\Plane-AI\Plane AI\Temp\Bin\Debug\ProBuilderMeshOps-Unity5.dll
