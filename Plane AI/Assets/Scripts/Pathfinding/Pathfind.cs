@@ -7,12 +7,16 @@ public class Pathfind : MonoBehaviour
 {
     GameObject currentNode;
     public int maxPathLength = 500;
+    GameObject[] gos;
+    private void Start()
+    {
+        //Get list of all Nodes
+
+        gos = GameObject.FindGameObjectsWithTag("Node");
+    }
 
     public List<GameObject> FindPath(GameObject startPoint, GameObject endPoint)
     {
-        //Get list of all Nodes
-        GameObject[] gos;
-        gos = GameObject.FindGameObjectsWithTag("Node");
 
         List<GameObject> openPathNodes = new List<GameObject>();
         List<GameObject> closedPathNodes = new List<GameObject>();
@@ -82,8 +86,6 @@ public class Pathfind : MonoBehaviour
                     adjacentNode.GetComponent<Node>().g = g;
                     adjacentNode.GetComponent<Node>().previousNode = currentNode;
                 }
-
-
             }
         }
 

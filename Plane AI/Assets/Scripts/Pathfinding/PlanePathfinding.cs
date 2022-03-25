@@ -6,6 +6,7 @@ public class PlanePathfinding : MonoBehaviour
 {
     [SerializeField]
     GameObject currentNode;
+    GameObject previousNode = null;
 
     GameObject oldTarget = null;
     public GameObject target;
@@ -22,6 +23,8 @@ public class PlanePathfinding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        maxAccelleration = controller.maxAcceleration;
+
         Path = new GameObject[500];
         if (target && currentNode)
         {
@@ -41,18 +44,19 @@ public class PlanePathfinding : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, currentNode.transform.position) > 35 || oldTarget != target)
         {
-            currentNode = FindCurrentNode();
-            if (target && currentNode)
-            {
-                if (target.GetComponentInChildren<CheckPoint>())
-                {
-                    if (target.GetComponentInChildren<CheckPoint>().connectedNode)
-                    {
-                        Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
-                        oldTarget = target;
-                    }
-                }
-            }
+          currentNode = FindCurrentNode();
+          if (target && currentNode && (currentNode != previousNode || oldTarget != target))
+          {
+              if (target.GetComponentInChildren<CheckPoint>())
+              {
+                  if (target.GetComponentInChildren<CheckPoint>().connectedNode)
+                  {
+                      Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
+                      oldTarget = target;
+                  }
+              }
+          }
+          previousNode = currentNode;
         }
         Vector3 seekDirection = new Vector3();
         maxAccelleration = controller.maxAcceleration;

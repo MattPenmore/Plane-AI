@@ -79,17 +79,14 @@ public class SteeringController : MonoBehaviour
         {
             newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
-        //else if (angle < -turnSpeed * Time.deltaTime)
+
+        //if ((newDirection.magnitude - rb.velocity.magnitude) / Time.deltaTime > maxAcceleration)
         //{
-        //    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
+        //    newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
         //}
+        newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
 
-        if ((newDirection.magnitude - rb.velocity.magnitude) / Time.deltaTime > maxAcceleration)
-        {
-            newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
-        }
-
-        if(newDirection.magnitude > maxVelocity)
+        if (newDirection.magnitude > maxVelocity)
         {
             rb.velocity = newDirection.normalized * maxVelocity;
         }

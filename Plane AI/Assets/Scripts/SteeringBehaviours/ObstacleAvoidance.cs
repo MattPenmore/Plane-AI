@@ -35,7 +35,7 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
 
-            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight / angleToPoint - sight.sightDirections[i] / angleToPoint) * avoidanceStrength;
+            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude * avoidanceStrength;
             i++;
         }
 

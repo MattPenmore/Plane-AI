@@ -341,6 +341,7 @@
 "Assets/Scripts/PlaneSight.cs"
 "Assets/Scripts/SteeringBehaviours/ObstacleAvoidance.cs"
 "Assets/Scripts/SteeringBehaviours/SteeringController.cs"
+"Assets/Scripts/Timer.cs"
 -langversion:8.0
 
 /deterministic

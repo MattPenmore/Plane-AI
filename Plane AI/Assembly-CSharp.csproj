@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Pathfinding\PlanePathfinding.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\NodeGrid.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
