@@ -68,10 +68,10 @@ public class SteeringController : MonoBehaviour
         //Smooth to prevent jerking
         if(angle < cutOffAngle && angle > -cutOffAngle)
         {
-            newDirection = rb.velocity + (rb.velocity.normalized * (avoidanceForce.magnitude * avoidanceRatio + seekForce.magnitude * seekRatio));
+            newDirection = rb.velocity;
         }
 
-        if(angle > (turnSpeed/* * Time.deltaTime*/))
+        if(angle > (turnSpeed))
         {
             newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
@@ -80,10 +80,6 @@ public class SteeringController : MonoBehaviour
             newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
         }
 
-        //if ((newDirection.magnitude - rb.velocity.magnitude) / Time.deltaTime > maxAcceleration)
-        //{
-        //    newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
-        //}
         newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
 
         if (newDirection.magnitude > maxVelocity)

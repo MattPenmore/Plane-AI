@@ -40,6 +40,9 @@ public class NodeGrid : MonoBehaviour
 
     int currentNodes = 0;
 
+    [SerializeField]
+    GameObject sphere;
+
     private void Start()
     {
     }
@@ -47,11 +50,11 @@ public class NodeGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            creatingGrid = true;
-            Grid = new GameObject();
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    creatingGrid = true;
+        //    Grid = new GameObject();
+        //}
 
         currentNodes = 0;
         if(creatingGrid)
@@ -153,25 +156,5 @@ public class NodeGrid : MonoBehaviour
         {
             creatingGrid = false;
         }
-        //for (int i = 0; i <= width; i++)
-        //{
-        //    for (int j = 0; j <= height; j++)
-        //    {
-        //        for (int k = 0; k <= length; k++)
-        //        {
-        //            Vector3 position = new Vector3(i * distBetweenNodes + offsetX, j * distBetweenNodes + offsetY, k * distBetweenNodes + offsetZ); ;
-        //            RaycastHit hit;
-        //            if (Physics.Raycast(position, Vector3.down, out hit, height * distBetweenNodes))
-        //            {
-        //                Debug.DrawRay(position, Vector3.down, Color.red);
-        //                if (hit.transform.tag == "Ground")
-        //                {
-        //                    CreateNode(i, j, k);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-
     }
 }
