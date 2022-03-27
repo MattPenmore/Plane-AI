@@ -96,17 +96,12 @@ public class Pathfind : MonoBehaviour
             currentNode = endPoint;
             finalPathNodes.Add(currentNode);
 
-            for (int i = endPoint.GetComponent<Node>().g + 1; i <= 0; i++)
+            for (int i = endPoint.GetComponent<Node>().g - 1; i >= 0; i--)
             {
-                foreach (GameObject Node in closedPathNodes)
-                {
-                    if (Node.GetComponent<Node>().g == i && Node.GetComponent<Node>().adjacentNodes.Contains(currentNode))
-                    {
-                        currentNode = Node;
-                        finalPathNodes.Add(currentNode);
-                    }
-                }
+                currentNode = closedPathNodes.Find(x => x.GetComponent<Node>().g == i && currentNode.GetComponent<Node>().adjacentNodes.Contains(x));
+                finalPathNodes.Add(currentNode);
             }
+
             finalPathNodes.Reverse();
         }
         return finalPathNodes;

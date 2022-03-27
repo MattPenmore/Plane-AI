@@ -39,6 +39,9 @@ public class SteeringController : MonoBehaviour
     [SerializeField]
     float bodyRotateSpeed;
 
+    [SerializeField]
+    float bodyRotateAmount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,15 +54,15 @@ public class SteeringController : MonoBehaviour
             avoidanceForce = avoidance.avoidanceForce;
             seekForce = seek.seekForce;
 
-        if(avoidanceForce.magnitude < maxAcceleration / 2)
-        {
-            avoidanceRatio = 0;
-        }
-        else
-        {
-            avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-        }
-
+        //if(avoidanceForce.magnitude < maxAcceleration / 5)
+        //{
+        //    avoidanceRatio = 0;
+        //}
+        //else
+        //{
+        //    avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+        //}
+        avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
         seekRatio = 1 - avoidanceRatio;
 
         newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
@@ -110,13 +113,20 @@ public class SteeringController : MonoBehaviour
             Vector3 perp = Vector3.Cross(transform.forward, direction);
             float dir = Vector3.Dot(perp, transform.up);
 
-            if(Mathf.Abs(dir) < 0.0005)
+            if(Mathf.Abs(dir) < 0.00005)
             {
                 body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
             }
             else
             {
-                body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0,Mathf.Clamp(-dir * 10000, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * 10000, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+                if(dir < 0)
+                {
+                    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0,Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+                }
+                else
+                {
+                    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0,Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+                }
             }
 
             transform.rotation = Quaternion.LookRotation(direction);

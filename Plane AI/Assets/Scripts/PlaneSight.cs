@@ -20,6 +20,7 @@ public class PlaneSight : MonoBehaviour
     public Rigidbody rb;
 
     public List<Vector3> sightDirections = new List<Vector3>();
+    public float[] sightMagnitudes;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,8 @@ public class PlaneSight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int k = 0;
+        sightMagnitudes = new float[numRayCastsWidth * numRayCastsHeight];
         sightDirections.Clear();
         for (int i = 0; i < numRayCastsWidth; i++)
         {
@@ -45,7 +48,9 @@ public class PlaneSight : MonoBehaviour
                 {
                     Debug.DrawRay(transform.position, dir, Color.red);
                     sightDirections.Add(dir.normalized * hit.distance);
+                    sightMagnitudes[k] = hit.distance;
                 }
+                k++;
             }
         }
     }
