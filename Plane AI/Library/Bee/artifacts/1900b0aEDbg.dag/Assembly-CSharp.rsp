@@ -354,6 +354,7 @@
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/CheckPoint.cs"
 "Assets/Scripts/MLAgent/ObstacleCourseAgent.cs"
+"Assets/Scripts/NumReachedEnd.cs"
 "Assets/Scripts/Pathfinding/PlanePathfinding.cs"
 "Assets/Scripts/PlaneController.cs"
 "Assets/Scripts/PlaneSight.cs"

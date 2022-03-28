@@ -5,16 +5,14 @@ using UnityEngine;
 public class PlanePathfinding : MonoBehaviour
 {
     public GameObject target;
-
     Camera cam;
 
     public int checkPointsReached = 0;
-    int numCheckPoints;
+    public int numCheckPoints;
     int startPos;
     public int targetnumber;
 
-    [SerializeField]
-    List<GameObject> checkPoints;
+    public List<GameObject> checkPoints;
 
     [SerializeField]
     List<GameObject> startPositions;
@@ -26,10 +24,15 @@ public class PlanePathfinding : MonoBehaviour
     float maxAccelleration = 50;
 
     Timer timer;
+    bool reachedEnd = false;
+
+    NumReachedEnd numReachedEnd;
+    bool hasCrashed = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        numReachedEnd = FindObjectOfType<NumReachedEnd>();
         timer = FindObjectOfType<Timer>();
         numCheckPoints = checkPoints.Count;
         maxAccelleration = controller.maxAcceleration;
@@ -46,9 +49,11 @@ public class PlanePathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(checkPointsReached >= numCheckPoints)
+        if(checkPointsReached > numCheckPoints && !reachedEnd)
         {
             timer.reachedEnd = true;
+            reachedEnd = true;
+            numReachedEnd.reachEndAmount++;
         }
         else
         {
@@ -64,5 +69,14 @@ public class PlanePathfinding : MonoBehaviour
         seekDirection = (target.transform.position - transform.position).normalized * maxAccelleration;
         seekForce = seekDirection;
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!hasCrashed && !reachedEnd)
+        {
+            hasCrashed = true;;
+            numReachedEnd.crashedAmount++;
+        }
     }
 }

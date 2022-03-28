@@ -31,9 +31,6 @@ public class SteeringController : MonoBehaviour
     public float angle;
 
     [SerializeField]
-    float cutOffAngle;
-
-    [SerializeField]
     GameObject body;
 
     [SerializeField]
@@ -42,6 +39,12 @@ public class SteeringController : MonoBehaviour
     [SerializeField]
     float bodyRotateAmount;
 
+    bool hasCrashed = false;
+
+    [SerializeField]
+    int checksPerSecond;
+
+    float timeSinceCheck = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,55 +54,51 @@ public class SteeringController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            avoidanceForce = avoidance.avoidanceForce;
-            seekForce = seek.seekForce;
-
-        //if(avoidanceForce.magnitude < maxAcceleration / 5)
-        //{
-        //    avoidanceRatio = 0;
-        //}
-        //else
-        //{
-        //    avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-        //}
-        avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-        seekRatio = 1 - avoidanceRatio;
-
-        newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
-        angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
-
-        //Smooth to prevent jerking
-        if(angle < cutOffAngle && angle > -cutOffAngle)
+        if(Time.time > 1)
         {
-            newDirection = rb.velocity;
-        }
+            if(!hasCrashed)
+            {
+                timeSinceCheck -= Time.deltaTime;
+                if(timeSinceCheck <= 0)
+                {
+                    timeSinceCheck = 1 / checksPerSecond;
+                    avoidanceForce = avoidance.avoidanceForce;
+                    seekForce = seek.seekForce;
 
-        if(angle > (turnSpeed))
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
-        else
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
 
-        newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
+                    avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+                    seekRatio = 1 - avoidanceRatio;
+                    newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
+                    angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
 
-        if (newDirection.magnitude > maxVelocity)
-        {
-            rb.velocity = newDirection.normalized * maxVelocity;
-        }
-        else if(newDirection.magnitude < minVelocity)
-        {
-            rb.velocity = newDirection.normalized * minVelocity;
-        }
-        else
-        {
-            rb.velocity = newDirection;
-        }
-        curSpeed = rb.velocity.magnitude;
+                    if(angle > (turnSpeed))
+                    {
+                        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
+                    }
+                    else
+                    {
+                        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
+                    }
 
-        LookAtDirection();
+                    newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
+
+                    if (newDirection.magnitude > maxVelocity)
+                    {
+                        rb.velocity = newDirection.normalized * maxVelocity;
+                    }
+                    else if(newDirection.magnitude < minVelocity)
+                    {
+                        rb.velocity = newDirection.normalized * minVelocity;
+                    }
+                    else
+                    {
+                        rb.velocity = newDirection;
+                    }
+                    curSpeed = rb.velocity.magnitude;
+                }
+                LookAtDirection();
+            }
+        }
     }
 
     public void LookAtDirection()
@@ -131,5 +130,15 @@ public class SteeringController : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(direction);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!hasCrashed)
+        {
+            hasCrashed = true;
+            rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+        }   
     }
 }

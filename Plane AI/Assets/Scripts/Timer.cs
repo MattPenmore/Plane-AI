@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField]
+    float timeScale;
     float time = 0;
     public bool reachedEnd = false;
 
@@ -13,7 +15,8 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = timeScale;
+        Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame
