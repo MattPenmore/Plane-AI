@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlanePathfinding : MonoBehaviour
 {
-    [SerializeField]
-    GameObject currentNode;
-    GameObject previousNode = null;
-
-    GameObject oldTarget = null;
     public GameObject target;
-    public GameObject[] Path;
+
+    Camera cam;
+
+    public int checkPointsReached = 0;
+    int numCheckPoints;
+    int startPos;
+    public int targetnumber;
+
     [SerializeField]
-    GameObject pathfind;
+    List<GameObject> checkPoints;
+
+    [SerializeField]
+    List<GameObject> startPositions;
 
     [SerializeField]
     SteeringController controller;
@@ -20,77 +25,44 @@ public class PlanePathfinding : MonoBehaviour
     public Vector3 seekForce;
     float maxAccelleration = 50;
 
+    Timer timer;
+
     // Start is called before the first frame update
     void Start()
     {
+        timer = FindObjectOfType<Timer>();
+        numCheckPoints = checkPoints.Count;
         maxAccelleration = controller.maxAcceleration;
+        cam = Camera.main;
 
-        Path = new GameObject[500];
-        if (target && currentNode)
-        {
-            if (target.GetComponentInChildren<CheckPoint>())
-            {
-                if(target.GetComponentInChildren<CheckPoint>().connectedNode)
-                {
-                    Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
-                    oldTarget = target;
-                }
-            }
-        }
+        startPos = Random.Range(0, numCheckPoints);
+        targetnumber = startPos;
+        transform.position = startPositions[startPos].transform.position;
+        transform.rotation = startPositions[startPos].transform.rotation;
+        cam.transform.rotation = startPositions[startPos].transform.rotation;
+        cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(transform.position, currentNode.transform.position) > 35 || oldTarget != target)
+        if(checkPointsReached >= numCheckPoints)
         {
-          currentNode = FindCurrentNode();
-          if (target && currentNode && (currentNode != previousNode || oldTarget != target))
-          {
-              if (target.GetComponentInChildren<CheckPoint>())
-              {
-                  if (target.GetComponentInChildren<CheckPoint>().connectedNode)
-                  {
-                      Path = pathfind.GetComponent<Pathfind>().FindPath(currentNode, target.GetComponentInChildren<CheckPoint>().connectedNode).ToArray();
-                      oldTarget = target;
-                  }
-              }
-          }
-          previousNode = currentNode;
-        }
-        Vector3 seekDirection = new Vector3();
-        maxAccelleration = controller.maxAcceleration;
-
-        if (Path.Length <= 1)
-        {
-            seekDirection = (target.transform.position - transform.position).normalized * maxAccelleration;
+            timer.reachedEnd = true;
         }
         else
         {
-            seekDirection = (Path[1].transform.position - transform.position).normalized * maxAccelleration;
-        }
-        seekForce = seekDirection;
-    }
-
-    GameObject FindCurrentNode()
-    {
-        //Get list of all Nodes
-        List<GameObject> gos;
-        gos = currentNode.GetComponent<Node>().adjacentNodes;
-        gos.Add(currentNode);
-
-        float curDistance = Mathf.Infinity;
-        GameObject closest = null;
-        foreach(GameObject go in gos)
-        {
-            float dis = Vector3.Distance(gameObject.transform.position, go.transform.position);
-            if (dis < curDistance)
+            if(targetnumber >= numCheckPoints)
             {
-                curDistance = dis;
-                closest = go;
+                targetnumber -= numCheckPoints;
             }
+
+            target = checkPoints[targetnumber];
         }
-        return closest;
-        
+
+        Vector3 seekDirection = new Vector3();
+        seekDirection = (target.transform.position - transform.position).normalized * maxAccelleration;
+        seekForce = seekDirection;
+
     }
 }

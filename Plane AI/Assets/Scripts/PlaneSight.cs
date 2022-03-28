@@ -44,7 +44,7 @@ public class PlaneSight : MonoBehaviour
                 Vector3 dir = (transform.right * curWidth) + (transform.up * curHeight) + (transform.forward * sightLength);
 
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, dir.normalized, out hit, maxSight))
+                if (Physics.Raycast(transform.position, dir.normalized, out hit, maxSight, ~6))
                 {
                     Debug.DrawRay(transform.position, dir, Color.red);
                     sightDirections.Add(dir.normalized * hit.distance);

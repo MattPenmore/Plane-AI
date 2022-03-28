@@ -4,49 +4,29 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField]
-    GameObject nextCheckpoint;
-
-    bool checkpointReached = false;
-
-    public GameObject connectedNode;
     Timer timer;
+
+    PlanePathfinding[] steeringPlanes;
+    List<bool> planeReachedTarget = new List<bool>();
 
     private void Awake()
     {
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Node");
-        float closestDist = Mathf.Infinity;
-        GameObject closest = null;
-        timer = FindObjectOfType<Timer>();
-        foreach(GameObject go in gos)
+        steeringPlanes = FindObjectsOfType<PlanePathfinding>();
+        foreach(PlanePathfinding plane in steeringPlanes)
         {
-            if(Vector3.Distance(gameObject.transform.position, go.transform.position) < closestDist)
-            {
-                closestDist = Vector3.Distance(gameObject.transform.position, go.transform.position);
-                closest = go;
-            }
+            planeReachedTarget.Add(false);
         }
-
-        connectedNode = closest;
-
-        transform.position = connectedNode.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.root.GetComponent<PlanePathfinding>() && !checkpointReached)
+        if(other.transform.root.GetComponent<PlanePathfinding>())
         {
-            if(other.transform.root.GetComponent<PlanePathfinding>().target == transform.parent.gameObject)
+            if(other.transform.root.GetComponent<PlanePathfinding>().target == transform.parent.gameObject && planeReachedTarget[System.Array.IndexOf(steeringPlanes, other.transform.root.GetComponent<PlanePathfinding>())] == false)
             {
-                if(nextCheckpoint != null)
-                {
-                    other.transform.root.GetComponent<PlanePathfinding>().target = nextCheckpoint;
-                }
-                else
-                {
-                    timer.reachedEnd = true;
-                }
-                checkpointReached = true;
+                other.transform.root.GetComponent<PlanePathfinding>().checkPointsReached++;
+                other.transform.root.GetComponent<PlanePathfinding>().targetnumber++;
+                planeReachedTarget[System.Array.IndexOf(steeringPlanes, other.transform.root.GetComponent<PlanePathfinding>())] = true;
             }
         }
     }
