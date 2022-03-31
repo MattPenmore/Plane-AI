@@ -50,6 +50,11 @@ public class PlaneSight : MonoBehaviour
                     sightDirections.Add(dir.normalized * hit.distance);
                     sightMagnitudes[k] = hit.distance;
                 }
+                else
+                {
+                    sightDirections.Add(dir.normalized * maxSight);
+                    sightMagnitudes[k] = maxSight;
+                }
                 k++;
             }
         }

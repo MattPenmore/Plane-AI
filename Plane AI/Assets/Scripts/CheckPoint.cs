@@ -5,10 +5,18 @@ using UnityEngine;
 public class CheckPoint : MonoBehaviour
 {
     PlanePathfinding[] planes;
+    public ObstacleCourseAgent[] MLPlanes;
     List<bool> planeReachedTarget = new List<bool>();
+    public List<bool> MLPlaneReachedTarget = new List<bool>();
 
     private void Awake()
     {
+        MLPlanes = FindObjectsOfType<ObstacleCourseAgent>();
+        foreach (ObstacleCourseAgent MLPlane in MLPlanes)
+        {
+            MLPlaneReachedTarget.Add(false);
+        }
+
         planes = FindObjectsOfType<PlanePathfinding>();
         foreach(PlanePathfinding plane in planes)
         {
@@ -18,7 +26,32 @@ public class CheckPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.root.GetComponent<PlanePathfinding>())
+        if (other.transform.root.GetComponent<ObstacleCourseAgent>())
+        {
+            if (other.transform.root.GetComponent<ObstacleCourseAgent>().target == transform.parent.gameObject && MLPlaneReachedTarget[System.Array.IndexOf(MLPlanes, other.transform.root.GetComponent<ObstacleCourseAgent>())] == false)
+            {
+                other.transform.root.GetComponent<ObstacleCourseAgent>().checkPointsReached++;
+                other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber++;
+                MLPlaneReachedTarget[System.Array.IndexOf(MLPlanes, other.transform.root.GetComponent<ObstacleCourseAgent>())] = true;
+
+                if (other.transform.root.GetComponent<ObstacleCourseAgent>().checkPointsReached <= other.transform.root.GetComponent<ObstacleCourseAgent>().numCheckPoints)
+                {
+                    if (other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber >= other.transform.root.GetComponent<ObstacleCourseAgent>().numCheckPoints)
+                    {
+                        other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber -= other.transform.root.GetComponent<ObstacleCourseAgent>().numCheckPoints;
+                    }
+
+                    other.transform.root.GetComponent<ObstacleCourseAgent>().target = other.transform.root.GetComponent<ObstacleCourseAgent>().checkPoints[other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber];
+                }
+            }
+            else if (other.transform.root.GetComponent<ObstacleCourseAgent>().target == transform.parent.gameObject && other.transform.root.GetComponent<ObstacleCourseAgent>().numCheckPoints == other.transform.root.GetComponent<ObstacleCourseAgent>().checkPointsReached)
+            {
+                other.transform.root.GetComponent<ObstacleCourseAgent>().checkPointsReached++;
+                other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber++;
+                MLPlaneReachedTarget[System.Array.IndexOf(MLPlanes, other.transform.root.GetComponent<ObstacleCourseAgent>())] = true;
+            }
+        }
+        else if (other.transform.root.GetComponent<PlanePathfinding>())
         {
             if(other.transform.root.GetComponent<PlanePathfinding>().target == transform.parent.gameObject && planeReachedTarget[System.Array.IndexOf(planes, other.transform.root.GetComponent<PlanePathfinding>())] == false)
             {
@@ -43,5 +76,6 @@ public class CheckPoint : MonoBehaviour
                 planeReachedTarget[System.Array.IndexOf(planes, other.transform.root.GetComponent<PlanePathfinding>())] = true;
             }
         }
+
     }
 }

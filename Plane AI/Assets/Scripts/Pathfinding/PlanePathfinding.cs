@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlanePathfinding : MonoBehaviour
 {
     public GameObject target;
+    [SerializeField]
     Camera cam;
 
     public int checkPointsReached = 0;
@@ -17,33 +18,23 @@ public class PlanePathfinding : MonoBehaviour
     [SerializeField]
     List<GameObject> startPositions;
 
-    [SerializeField]
-    SteeringController controller;
-
     public Vector3 seekForce;
     float maxAccelleration = 50;
 
     Timer timer;
-    bool reachedEnd = false;
+    public bool reachedEnd = false;
 
     NumReachedEnd numReachedEnd;
     bool hasCrashed = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         numReachedEnd = FindObjectOfType<NumReachedEnd>();
         timer = FindObjectOfType<Timer>();
         numCheckPoints = checkPoints.Count;
-        maxAccelleration = controller.maxAcceleration;
         cam = Camera.main;
 
-        startPos = Random.Range(0, numCheckPoints);
-        targetnumber = startPos;
-        transform.position = startPositions[startPos].transform.position;
-        transform.rotation = startPositions[startPos].transform.rotation;
-        cam.transform.rotation = startPositions[startPos].transform.rotation;
-        cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
+        ResetPlane();
     }
 
     // Update is called once per frame
@@ -69,6 +60,20 @@ public class PlanePathfinding : MonoBehaviour
         seekDirection = (target.transform.position - transform.position).normalized * maxAccelleration;
         seekForce = seekDirection;
 
+    }
+
+    public void ResetPlane()
+    {
+        startPos = Random.Range(0, numCheckPoints);
+        targetnumber = startPos;
+        target = checkPoints[targetnumber];
+        transform.position = startPositions[startPos].transform.position;
+        transform.rotation = startPositions[startPos].transform.rotation;
+        //cam.transform.rotation = startPositions[startPos].transform.rotation;
+        //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
+        checkPointsReached = 0;
+        reachedEnd = false;
+        hasCrashed = false;
     }
 
     private void OnCollisionEnter(Collision collision)

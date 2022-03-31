@@ -17,7 +17,6 @@ public class SteeringController : MonoBehaviour
     float avoidanceRatio;
     public float maxVelocity = 300;
     public float minVelocity = 50;
-    private float minSpeed = 0;
 
     public float maxAcceleration = 50;
 
