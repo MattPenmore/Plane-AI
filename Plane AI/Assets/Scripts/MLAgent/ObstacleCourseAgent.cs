@@ -39,6 +39,7 @@ public class ObstacleCourseAgent : Agent
     float prevDistance;
     float distanceToTarget;
     float prevDistanceReached;
+    float timeGotCloser = 0;
 
     float timeTargetReached = 0;
     bool hasCrashed = false;
@@ -124,15 +125,19 @@ public class ObstacleCourseAgent : Agent
             distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
             if (distanceToTarget < prevDistance)
             {
-                SetReward(prevDistance - distanceToTarget);
+                AddReward(prevDistance - distanceToTarget);
                 reward += prevDistance - distanceToTarget;
                 rewardTime = Time.time;
-                prevDistanceReached = distanceToTarget;
+                if(distanceToTarget < prevDistanceReached)
+                {
+                    prevDistanceReached = distanceToTarget;
+                    timeGotCloser = Time.time;
+                }
                 prevDistance = distanceToTarget;
             }
             else if(prevDistance < distanceToTarget)
             {
-                SetReward(prevDistance - distanceToTarget);
+                AddReward(prevDistance - distanceToTarget);
                 reward += prevDistance - distanceToTarget;
 
                 prevDistance = distanceToTarget;
@@ -144,15 +149,17 @@ public class ObstacleCourseAgent : Agent
             oldTarget = target;
             distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
             prevDistanceReached = distanceToTarget;
-            SetReward(10000 + Mathf.Clamp(50000 / (Time.time - timeTargetReached), 0, 50000));
+            AddReward(10000 + Mathf.Clamp(50000 / (Time.time - timeTargetReached), 0, 50000));
             reward += 10000 + Mathf.Clamp(50000 / (Time.time - timeTargetReached), 0, 50000);
             rewardTime = Time.time;
+            timeGotCloser = Time.time;
             timeTargetReached = Time.time;
+            Debug.Log(checkPointsReached);
         }
 
         if(reachedEnd)
         {
-            SetReward(100000);
+            AddReward(100000);
             reward += 100000;
             rewardTime = Time.time;
             EndEpisode();
@@ -161,6 +168,15 @@ public class ObstacleCourseAgent : Agent
         {
             rewardTime = Time.time;
             timeTargetReached = Time.time;
+            timeGotCloser = Time.time;
+            EndEpisode();
+        }
+        else if(Time.time - timeGotCloser > 10 || reward < -10)
+        {
+            rewardTime = Time.time;
+            timeTargetReached = Time.time;
+            timeGotCloser = Time.time;
+            AddReward(-1000);
             EndEpisode();
         }
     }
@@ -197,6 +213,7 @@ public class ObstacleCourseAgent : Agent
     public override void OnEpisodeBegin()
     {
         reward = 0;
+        timeGotCloser = Time.time;
         //pathfinding = GetComponent<PlanePathfinding>();
         ResetPlane();
         
@@ -243,7 +260,7 @@ public class ObstacleCourseAgent : Agent
 
     public void ResetPlane()
     {
-        startPos = Random.Range(0, numCheckPoints);
+        startPos = Random.Range(1,numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;
@@ -257,8 +274,9 @@ public class ObstacleCourseAgent : Agent
         distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
         prevDistanceReached = distanceToTarget;
         prevDistance = distanceToTarget;
+        rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * minVelocity;
 
-        foreach( GameObject checkPoint in checkPoints)
+        foreach ( GameObject checkPoint in checkPoints)
         {
             if(checkPoint.GetComponentInChildren<CheckPoint>().MLPlaneReachedTarget.Count >= 1)
             {

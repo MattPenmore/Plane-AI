@@ -479,10 +479,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -494,11 +494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -4360,10 +4360,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -4375,11 +4375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -5076,10 +5076,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -5091,11 +5091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -5790,10 +5790,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -5805,11 +5805,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -6408,10 +6408,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -6423,11 +6423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -8311,10 +8311,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -8326,11 +8326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -8918,10 +8918,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -8933,11 +8933,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -9192,10 +9192,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -9207,11 +9207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -10877,10 +10877,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -10892,11 +10892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -12021,10 +12021,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -12036,11 +12036,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -13882,10 +13882,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -13897,11 +13897,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -15709,10 +15709,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -15724,11 +15724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -16276,10 +16276,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -16291,11 +16291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -16650,10 +16650,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -16665,11 +16665,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -18059,10 +18059,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -18074,11 +18074,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -20139,10 +20139,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -20154,11 +20154,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -21978,10 +21978,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -21993,11 +21993,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -24319,10 +24319,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -24334,11 +24334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -25619,10 +25619,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -25634,11 +25634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -26090,10 +26090,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -26105,11 +26105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -28115,10 +28115,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -28130,11 +28130,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -30253,10 +30253,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -30268,11 +30268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -31530,10 +31530,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -31545,11 +31545,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -32449,10 +32449,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -32464,11 +32464,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -34087,10 +34087,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -34102,11 +34102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -35915,10 +35915,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -35930,11 +35930,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -37072,10 +37072,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -37087,11 +37087,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -38993,10 +38993,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -39008,11 +39008,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -41310,10 +41310,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -41325,11 +41325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -42295,10 +42295,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -42310,11 +42310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -46688,10 +46688,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -46703,11 +46703,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -46876,7 +46876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22244ee54cb84a14f8d77c731ff9068c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 1
+  timeScale: 2
   reachedEnd: 0
   text: {fileID: 2117847743}
 --- !u!1 &1332570961
@@ -55513,10 +55513,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -55528,11 +55528,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -56983,10 +56983,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -56998,11 +56998,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -58020,10 +58020,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -58035,11 +58035,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -58531,10 +58531,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -58546,11 +58546,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -61584,10 +61584,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -61599,11 +61599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -61862,10 +61862,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -61877,11 +61877,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -65287,10 +65287,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -65302,11 +65302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -65981,10 +65981,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -65996,11 +65996,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -69490,10 +69490,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -69505,11 +69505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -71694,10 +71694,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -71709,11 +71709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -71972,10 +71972,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -71987,11 +71987,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -73019,10 +73019,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -73034,11 +73034,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -73945,10 +73945,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -73960,11 +73960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -75417,10 +75417,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -75432,11 +75432,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -75985,10 +75985,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -76000,11 +76000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -77647,10 +77647,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -77662,11 +77662,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -78506,10 +78506,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -78521,11 +78521,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -78877,10 +78877,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -78892,11 +78892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size
@@ -79156,10 +79156,10 @@ PrefabInstance:
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 5f8b1ceaf32a58846b81f1ccfb588409, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: a4bead037f519f545abc86bb467b8225, type: 3}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_InferenceDevice
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110394, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
@@ -79171,11 +79171,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110404, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: DecisionPeriod
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: MaxStep
-      value: 1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5180249812480110405, guid: c1f49e51afc92494b8aec43058484187, type: 3}
       propertyPath: checkPoints.Array.size

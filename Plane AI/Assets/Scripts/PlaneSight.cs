@@ -46,7 +46,7 @@ public class PlaneSight : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dir.normalized, out hit, maxSight, ~6))
                 {
-                    Debug.DrawRay(transform.position, dir, Color.red);
+                    //Debug.DrawRay(transform.position, dir, Color.red);
                     sightDirections.Add(dir.normalized * hit.distance);
                     sightMagnitudes[k] = hit.distance;
                 }
