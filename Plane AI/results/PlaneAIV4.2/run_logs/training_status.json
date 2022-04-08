@@ -1,0 +1,41 @@
+{
+    "ObstacleCourseAI": {
+        "checkpoints": [
+            {
+                "steps": 4999970,
+                "file_path": "results\\PlaneAIV4.2\\ObstacleCourseAI\\ObstacleCourseAI-4999970.nn",
+                "reward": 4590.599149424856,
+                "creation_time": 1649356645.0297134
+            },
+            {
+                "steps": 7027575,
+                "file_path": "results\\PlaneAIV4.2\\ObstacleCourseAI\\ObstacleCourseAI-7027575.nn",
+                "reward": 9217.468342238206,
+                "creation_time": 1649359395.2667036
+            },
+            {
+                "steps": 7177794,
+                "file_path": "results\\PlaneAIV4.2\\ObstacleCourseAI\\ObstacleCourseAI-7177794.nn",
+                "reward": 17341.791505169047,
+                "creation_time": 1649359690.8744926
+            },
+            {
+                "steps": 7188264,
+                "file_path": "results\\PlaneAIV4.2\\ObstacleCourseAI\\ObstacleCourseAI-7188264.nn",
+                "reward": 23516.50281478371,
+                "creation_time": 1649426254.48808
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 7188264,
+            "file_path": "results\\PlaneAIV4.2\\ObstacleCourseAI.nn",
+            "reward": 23516.50281478371,
+            "creation_time": 1649426254.48808
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.1.0",
+        "mlagents_version": "0.20.0",
+        "tensorflow_version": "2.7.1"
+    }
+}

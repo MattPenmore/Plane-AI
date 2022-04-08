@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -94,6 +94,7 @@
     <None Include="Assets\ProCore\ProBuilder\About\pc_AboutEntry_ProBuilder.txt" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
     <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
+    <None Include="Assets\NeuralNetworks\Reinforcement\New Text Document.txt" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_SelectionPicker.shader" />
     <None Include="Assets\ProCore\ProBuilder\Classes\ClassesLib\pb_Stl.dll" />

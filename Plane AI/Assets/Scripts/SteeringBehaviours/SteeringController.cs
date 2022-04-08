@@ -53,50 +53,47 @@ public class SteeringController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time > 1)
+        if(!hasCrashed)
         {
-            if(!hasCrashed)
+            timeSinceCheck -= Time.deltaTime;
+            if(timeSinceCheck <= 0)
             {
-                timeSinceCheck -= Time.deltaTime;
-                if(timeSinceCheck <= 0)
+                timeSinceCheck = 1 / checksPerSecond;
+                avoidanceForce = avoidance.avoidanceForce;
+                seekForce = seek.seekForce;
+
+
+                avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+                seekRatio = 1 - avoidanceRatio;
+                newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
+                angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
+
+                if(angle > (turnSpeed))
                 {
-                    timeSinceCheck = 1 / checksPerSecond;
-                    avoidanceForce = avoidance.avoidanceForce;
-                    seekForce = seek.seekForce;
-
-
-                    avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-                    seekRatio = 1 - avoidanceRatio;
-                    newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
-                    angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
-
-                    if(angle > (turnSpeed))
-                    {
-                        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
-                    }
-                    else
-                    {
-                        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
-                    }
-
-                    newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
-
-                    if (newDirection.magnitude > maxVelocity)
-                    {
-                        rb.velocity = newDirection.normalized * maxVelocity;
-                    }
-                    else if(newDirection.magnitude < minVelocity)
-                    {
-                        rb.velocity = newDirection.normalized * minVelocity;
-                    }
-                    else
-                    {
-                        rb.velocity = newDirection;
-                    }
-                    curSpeed = rb.velocity.magnitude;
+                    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
                 }
-                LookAtDirection();
+                else
+                {
+                    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
+                }
+
+                newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
+
+                if (newDirection.magnitude > maxVelocity)
+                {
+                    rb.velocity = newDirection.normalized * maxVelocity;
+                }
+                else if(newDirection.magnitude < minVelocity)
+                {
+                    rb.velocity = newDirection.normalized * minVelocity;
+                }
+                else
+                {
+                    rb.velocity = newDirection;
+                }
+                curSpeed = rb.velocity.magnitude;
             }
+            LookAtDirection();
         }
     }
 
@@ -131,13 +128,13 @@ public class SteeringController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(!hasCrashed)
-        {
-            hasCrashed = true;
-            rb.useGravity = true;
-            rb.velocity = Vector3.zero;
-        }   
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if(!hasCrashed)
+    //    {
+    //        hasCrashed = true;
+    //        rb.useGravity = true;
+    //        rb.velocity = Vector3.zero;
+    //    }   
+    //}
 }

@@ -1,0 +1,4 @@
+Pure Reinforcement learning.
+
+69 inputs: 3 velocity floats(x,y,z), 3 posiiton of target relative to plane floats (x,y,z), 21 raycast positions relative to player (x,y,z)
+

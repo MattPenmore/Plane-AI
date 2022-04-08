@@ -42,9 +42,11 @@ public class PlanePathfinding : MonoBehaviour
     {
         if(checkPointsReached > numCheckPoints && !reachedEnd)
         {
-            timer.reachedEnd = true;
+            //timer.reachedEnd = true;
+            timer.time = 0;
             reachedEnd = true;
             numReachedEnd.reachEndAmount++;
+            ResetPlane();
         }
         else
         {
@@ -64,7 +66,7 @@ public class PlanePathfinding : MonoBehaviour
 
     public void ResetPlane()
     {
-        startPos = Random.Range(0, numCheckPoints);
+        startPos = 1;//Random.Range(0, numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         transform.position = startPositions[startPos].transform.position;
@@ -74,6 +76,16 @@ public class PlanePathfinding : MonoBehaviour
         checkPointsReached = 0;
         reachedEnd = false;
         hasCrashed = false;
+
+        GetComponent<Rigidbody>().velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * 50;
+
+        foreach (GameObject checkPoint in checkPoints)
+        {
+            if (checkPoint.GetComponentInChildren<CheckPoint>().planeReachedTarget.Count >= 1)
+            {
+                checkPoint.GetComponentInChildren<CheckPoint>().planeReachedTarget[System.Array.IndexOf(checkPoint.GetComponentInChildren<CheckPoint>().planes, GetComponent<PlanePathfinding>())] = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -82,6 +94,7 @@ public class PlanePathfinding : MonoBehaviour
         {
             hasCrashed = true;;
             numReachedEnd.crashedAmount++;
+            ResetPlane();
         }
     }
 }

@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
 {
     [SerializeField]
     float timeScale;
-    float time = 0;
+    public float time = 0;
     public bool reachedEnd = false;
 
     [SerializeField]

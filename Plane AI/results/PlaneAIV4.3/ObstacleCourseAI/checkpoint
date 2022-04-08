@@ -1,0 +1,2 @@
+model_checkpoint_path: "ObstacleCourseAI-243719.ckpt"
+all_model_checkpoint_paths: "ObstacleCourseAI-243719.ckpt"

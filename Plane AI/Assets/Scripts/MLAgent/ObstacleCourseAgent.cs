@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
+using Unity.MLAgents.Policies;
 using Unity.MLAgents.Sensors;
 
 public class ObstacleCourseAgent : Agent
 {
-    [SerializeField]
-    float reward;
+    public float reward;
 
     float rewardTime = 0;
 
@@ -22,7 +22,6 @@ public class ObstacleCourseAgent : Agent
 
     [SerializeField]
     float bodyRotateAmount;
-
     Rigidbody rb;
     EnvironmentParameters defaultParameters;
 
@@ -70,10 +69,22 @@ public class ObstacleCourseAgent : Agent
         {
             sensor.AddObservation(target.transform.position - transform.position);
         }
-        sensor.AddObservation(rb.velocity);
-        foreach(Vector3 sight in sight.sightDirections)
+
+        if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 27)
         {
-            sensor.AddObservation(sight);
+            sensor.AddObservation(rb.velocity.normalized * (rb.velocity.magnitude - minVelocity)/(maxVelocity-minVelocity));
+            foreach(float sightM in sight.sightMagnitudes)
+            {
+                sensor.AddObservation(sightM / sight.maxSight);
+            }
+        }
+        else if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 69)
+        {
+            sensor.AddObservation(rb.velocity);
+            foreach (Vector3 sight in sight.sightDirections)
+            {
+                sensor.AddObservation(sight);
+            }
         }
     }
     public override void OnActionReceived(float[] vectorAction)
@@ -149,8 +160,8 @@ public class ObstacleCourseAgent : Agent
             oldTarget = target;
             distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
             prevDistanceReached = distanceToTarget;
-            AddReward(10000 + Mathf.Clamp(50000 / (Time.time - timeTargetReached), 0, 50000));
-            reward += 10000 + Mathf.Clamp(50000 / (Time.time - timeTargetReached), 0, 50000);
+            AddReward(1000 + Mathf.Clamp(5000 / (Time.time - timeTargetReached), 0, 3000));
+            reward += 1000 + Mathf.Clamp(5000 / (Time.time - timeTargetReached), 0, 3000);
             rewardTime = Time.time;
             timeGotCloser = Time.time;
             timeTargetReached = Time.time;
@@ -159,24 +170,16 @@ public class ObstacleCourseAgent : Agent
 
         if(reachedEnd)
         {
-            AddReward(100000);
-            reward += 100000;
+            AddReward(10000);
+            reward += 10000;
             rewardTime = Time.time;
             EndEpisode();
         }
-        else if(hasCrashed || transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10)
+        else if(hasCrashed || transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10 || Time.time - timeTargetReached > 20)
         {
             rewardTime = Time.time;
             timeTargetReached = Time.time;
             timeGotCloser = Time.time;
-            EndEpisode();
-        }
-        else if(Time.time - timeGotCloser > 10 || reward < -10)
-        {
-            rewardTime = Time.time;
-            timeTargetReached = Time.time;
-            timeGotCloser = Time.time;
-            AddReward(-1000);
             EndEpisode();
         }
     }
@@ -260,7 +263,7 @@ public class ObstacleCourseAgent : Agent
 
     public void ResetPlane()
     {
-        startPos = Random.Range(1,numCheckPoints);
+        startPos = 7/*Random.Range(0,numCheckPoints)*/;
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;

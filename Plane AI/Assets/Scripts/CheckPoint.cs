@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    PlanePathfinding[] planes;
+    public PlanePathfinding[] planes;
     public ObstacleCourseAgent[] MLPlanes;
-    List<bool> planeReachedTarget = new List<bool>();
+    public List<bool> planeReachedTarget = new List<bool>();
     public List<bool> MLPlaneReachedTarget = new List<bool>();
 
     private void Awake()
