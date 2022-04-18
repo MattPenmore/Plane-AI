@@ -4,5 +4,9 @@ mlagents-learn config/ObstacleCourseAI2.yaml --run-id=PlaneAIV3.2 --time-scale 2
 
 mlagents-learn config/ObstacleCourseAI.yaml --run-id=PlaneAIV4.1 --time-scale 2 --resume (ObstacleCourseAI)
 
-mlagents-learn config/ObstacleCourseAI.yaml --run-id=PlaneAIV4.1 --time-scale 2 --resume (continuation of v4.1, staring at checkpoint 7)
+mlagents-learn config/ObstacleCourseAI.yaml --run-id=PlaneAIV4.4 --time-scale 2 --resume
+
+mlagents-learn config/ObstacleCourseAI.yaml --run-id=PlaneAIV5.1 --time-scale 2 --resume 
+mlagents-learn config/ObstacleCourseAI.yaml --run-id=PlaneAIV5.3 --time-scale 2 --resume
+mlagents-learn config/ObstacleCourseAI3.yaml --run-id=PlaneAIV5.5 --time-scale 2 --resume
 

@@ -2,17 +2,18 @@
     "ObstacleCourseAI": {
         "checkpoints": [
             {
-                "steps": 243719,
-                "file_path": "results\\PlaneAIV4.3\\ObstacleCourseAI\\ObstacleCourseAI-243719.nn",
-                "reward": 9.817836980819703,
-                "creation_time": 1649444874.8120472
-            }
+                "steps": 14999872,
+                "file_path": "results\\PlaneAIV4.3\\ObstacleCourseAI\\ObstacleCourseAI-14999872.nn",
+                "reward": 591.3201484680176,
+                "creation_time": 1649477680.6888907
+            },
+            
         ],
         "final_checkpoint": {
-            "steps": 243719,
-            "file_path": "results\\PlaneAIV4.3\\ObstacleCourseAI.nn",
-            "reward": 9.817836980819703,
-            "creation_time": 1649444874.8120472
+            "steps": 14999872,
+                "file_path": "results\\PlaneAIV4.3\\ObstacleCourseAI.nn",
+                "reward": 591.3201484680176,
+                "creation_time": 1649477680.6888907
         }
     },
     "metadata": {

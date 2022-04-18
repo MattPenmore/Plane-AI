@@ -66,18 +66,15 @@ public class SteeringController : MonoBehaviour
                 avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
                 seekRatio = 1 - avoidanceRatio;
                 newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
-                angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
 
-                if(angle > (turnSpeed))
-                {
-                    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
-                }
-                else
-                {
-                    newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
-                }
+                Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
+                //Quaternion oldRotation = transform.rotation;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+                newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
+                //transform.rotation = oldRotation;
+                //newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, turnSpeed * Time.deltaTime, 0.0f) * newDirection.magnitude;
 
-                newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
+                //newDirection = newDirection.normalized * (rb.velocity.magnitude + maxAcceleration * Time.deltaTime);
 
                 if (newDirection.magnitude > maxVelocity)
                 {

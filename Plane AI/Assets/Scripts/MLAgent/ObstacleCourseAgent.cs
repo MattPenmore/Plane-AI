@@ -14,8 +14,8 @@ public class ObstacleCourseAgent : Agent
     [SerializeField]
     PlaneSight sight;
 
-    [SerializeField]
-    GameObject body;
+    //[SerializeField]
+    //GameObject body;
 
     [SerializeField]
     float bodyRotateSpeed;
@@ -31,7 +31,6 @@ public class ObstacleCourseAgent : Agent
     public float maxAcceleration = 60;
 
     public float turnSpeed = 60f;
-    public float angle;
 
     public GameObject target;
     public GameObject oldTarget;
@@ -67,7 +66,7 @@ public class ObstacleCourseAgent : Agent
     {
         if(target)
         {
-            sensor.AddObservation(target.transform.position - transform.position);
+            sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position)/sight.maxSight);
         }
 
         if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 27)
@@ -86,6 +85,14 @@ public class ObstacleCourseAgent : Agent
                 sensor.AddObservation(sight);
             }
         }
+        else if (GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 25)
+        {
+            sensor.AddObservation((rb.velocity.magnitude - minVelocity) / (maxVelocity - minVelocity));
+            foreach (float sightM in sight.sightMagnitudes)
+            {
+                sensor.AddObservation(sightM / sight.maxSight);
+            }
+        }
     }
     public override void OnActionReceived(float[] vectorAction)
     {
@@ -93,27 +100,21 @@ public class ObstacleCourseAgent : Agent
         {
             reachedEnd = true;
         }
-        else
-        {
-            if (targetnumber >= numCheckPoints)
-            {
-                targetnumber -= numCheckPoints;
-            }
 
-            target = checkPoints[targetnumber];
+        if (targetnumber >= numCheckPoints)
+        {
+            targetnumber -= numCheckPoints;
         }
 
-        Vector3 newDirection = rb.velocity + new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
-        angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
+        target = checkPoints[targetnumber];
 
-        if (angle > (turnSpeed))
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
-        else
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
+        Vector3 output = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
+        Vector3 newDirection = rb.velocity + transform.TransformDirection(output);
+        Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
+        //Quaternion oldRotation = transform.rotation;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+        newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
+        //transform.rotation = oldRotation;
 
         if (newDirection.magnitude > maxVelocity)
         {
@@ -160,8 +161,8 @@ public class ObstacleCourseAgent : Agent
             oldTarget = target;
             distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
             prevDistanceReached = distanceToTarget;
-            AddReward(1000 + Mathf.Clamp(5000 / (Time.time - timeTargetReached), 0, 3000));
-            reward += 1000 + Mathf.Clamp(5000 / (Time.time - timeTargetReached), 0, 3000);
+            AddReward(2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000));
+            reward += 2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000);
             rewardTime = Time.time;
             timeGotCloser = Time.time;
             timeTargetReached = Time.time;
@@ -170,13 +171,25 @@ public class ObstacleCourseAgent : Agent
 
         if(reachedEnd)
         {
-            AddReward(10000);
-            reward += 10000;
+            AddReward(20000);
+            reward += 20000;
             rewardTime = Time.time;
             EndEpisode();
         }
-        else if(hasCrashed || transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10 || Time.time - timeTargetReached > 20)
+        else if(hasCrashed || transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10 /*|| Time.time - timeTargetReached > 20*/)
         {
+            //if(checkPointsReached != 0)
+            //{
+            //    if(targetnumber != 0)
+            //    {
+            //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[targetnumber - 1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
+            //    }
+            //    else
+            //    {
+            //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[numCheckPoints -1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
+            //    }
+            //}
+
             rewardTime = Time.time;
             timeTargetReached = Time.time;
             timeGotCloser = Time.time;
@@ -186,16 +199,7 @@ public class ObstacleCourseAgent : Agent
     public override void Heuristic(float[] actionsOut)
     {
         Vector3 newDirection = rb.velocity + new Vector3(actionsOut[0], actionsOut[1], actionsOut[2]) * maxAcceleration;
-        angle = Vector3.Angle(newDirection, transform.TransformDirection(Vector3.forward));
-
-        if (angle > (turnSpeed))
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, (turnSpeed / angle) * Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
-        else
-        {
-            newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, Time.deltaTime, 0.0f) * newDirection.magnitude;
-        }
+        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, turnSpeed * Time.deltaTime, 0.0f) * newDirection.magnitude;
 
         if (newDirection.magnitude > maxVelocity)
         {
@@ -230,24 +234,24 @@ public class ObstacleCourseAgent : Agent
         /* If we have a non-zero direction then look towards that direciton otherwise do nothing */
         if (direction.sqrMagnitude > 0.001f)
         {
-            Vector3 perp = Vector3.Cross(transform.forward, direction);
-            float dir = Vector3.Dot(perp, transform.up);
+            //Vector3 perp = Vector3.Cross(transform.forward, direction);
+            //float dir = Vector3.Dot(perp, transform.up);
 
-            if (Mathf.Abs(dir) < 0.00005)
-            {
-                body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
-            }
-            else
-            {
-                if (dir < 0)
-                {
-                    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-                }
-                else
-                {
-                    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-                }
-            }
+            //if (Mathf.Abs(dir) < 0.00005)
+            //{
+            //    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
+            //}
+            //else
+            //{
+            //    if (dir < 0)
+            //    {
+            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+            //    }
+            //    else
+            //    {
+            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
+            //    }
+            //}
 
             transform.rotation = Quaternion.LookRotation(direction);
         }
@@ -263,7 +267,7 @@ public class ObstacleCourseAgent : Agent
 
     public void ResetPlane()
     {
-        startPos = 7/*Random.Range(0,numCheckPoints)*/;
+        startPos = Random.Range(0,numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;
@@ -274,6 +278,7 @@ public class ObstacleCourseAgent : Agent
         checkPointsReached = 0;
         reachedEnd = false;
         hasCrashed = false;
+        //body.transform.rotation = Quaternion.identity;
         distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
         prevDistanceReached = distanceToTarget;
         prevDistance = distanceToTarget;

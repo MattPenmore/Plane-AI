@@ -94,7 +94,7 @@
     <None Include="Assets\ProCore\ProBuilder\About\pc_AboutEntry_ProBuilder.txt" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_NormalPreview.shader" />
     <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />
-    <None Include="Assets\NeuralNetworks\Reinforcement\New Text Document.txt" />
+    <None Include="Assets\NeuralNetworks\Reinforcement\V1\New Text Document.txt" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_SelectionPicker.shader" />
     <None Include="Assets\ProCore\ProBuilder\Classes\ClassesLib\pb_Stl.dll" />
