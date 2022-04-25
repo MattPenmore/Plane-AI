@@ -50,12 +50,19 @@ public class PlanePathfinding : MonoBehaviour
         }
         else
         {
-            if(targetnumber >= numCheckPoints)
+            if(!GetComponent<ObstacleCourseAgent>())
             {
-                targetnumber -= numCheckPoints;
-            }
+                if(targetnumber >= numCheckPoints)
+                {
+                    targetnumber -= numCheckPoints;
+                }
 
-            target = checkPoints[targetnumber];
+                target = checkPoints[targetnumber];
+            }
+            else
+            {
+                target = GetComponent<ObstacleCourseAgent>().target;
+            }
         }
 
         Vector3 seekDirection = new Vector3();
@@ -66,18 +73,20 @@ public class PlanePathfinding : MonoBehaviour
 
     public void ResetPlane()
     {
-        startPos = 1;//Random.Range(0, numCheckPoints);
-        targetnumber = startPos;
-        target = checkPoints[targetnumber];
-        transform.position = startPositions[startPos].transform.position;
-        transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
-        checkPointsReached = 0;
-        reachedEnd = false;
-        hasCrashed = false;
-
-        GetComponent<Rigidbody>().velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * 50;
+        if (!GetComponent<ObstacleCourseAgent>())
+        {
+            startPos = 1;//Random.Range(0, numCheckPoints);
+            targetnumber = startPos;
+            target = checkPoints[targetnumber];
+            transform.position = startPositions[startPos].transform.position;
+            transform.rotation = startPositions[startPos].transform.rotation;
+            //cam.transform.rotation = startPositions[startPos].transform.rotation;
+            //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
+            GetComponent<Rigidbody>().velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * 50;
+        }
+            checkPointsReached = 0;
+            reachedEnd = false;
+            hasCrashed = false;
 
         foreach (GameObject checkPoint in checkPoints)
         {

@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
         Time.timeScale = timeScale;
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = 60;
     }
 
     // Update is called once per frame

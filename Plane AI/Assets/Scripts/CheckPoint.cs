@@ -51,7 +51,8 @@ public class CheckPoint : MonoBehaviour
                 MLPlaneReachedTarget[System.Array.IndexOf(MLPlanes, other.transform.root.GetComponent<ObstacleCourseAgent>())] = true;
             }
         }
-        else if (other.transform.root.GetComponent<PlanePathfinding>())
+
+        if (other.transform.root.GetComponent<PlanePathfinding>())
         {
             if(other.transform.root.GetComponent<PlanePathfinding>().target == transform.parent.gameObject && planeReachedTarget[System.Array.IndexOf(planes, other.transform.root.GetComponent<PlanePathfinding>())] == false)
             {

@@ -25,6 +25,7 @@ public class SteeringController : MonoBehaviour
     public Vector3 avoidanceForce;
     public Vector3 seekForce;
     public Vector3 newDirection;
+    public Vector3 desiredDirection;
 
     public float curSpeed;
     public float angle;
@@ -40,10 +41,6 @@ public class SteeringController : MonoBehaviour
 
     bool hasCrashed = false;
 
-    [SerializeField]
-    int checksPerSecond;
-
-    float timeSinceCheck = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,18 +52,15 @@ public class SteeringController : MonoBehaviour
     {
         if(!hasCrashed)
         {
-            timeSinceCheck -= Time.deltaTime;
-            if(timeSinceCheck <= 0)
-            {
-                timeSinceCheck = 1 / checksPerSecond;
-                avoidanceForce = avoidance.avoidanceForce;
-                seekForce = seek.seekForce;
+            avoidanceForce = avoidance.avoidanceForce;
+            seekForce = seek.seekForce;
 
-
-                avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-                seekRatio = 1 - avoidanceRatio;
-                newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
-
+            avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+            seekRatio = 1 - avoidanceRatio;
+            desiredDirection = avoidanceForce * avoidanceRatio + seekForce * seekRatio;
+            newDirection = rb.velocity + avoidanceForce * avoidanceRatio + seekForce * seekRatio;
+            //if(!GetComponent<ObstacleCourseAgent>())
+            //{
                 Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
                 //Quaternion oldRotation = transform.rotation;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
@@ -89,8 +83,8 @@ public class SteeringController : MonoBehaviour
                     rb.velocity = newDirection;
                 }
                 curSpeed = rb.velocity.magnitude;
-            }
-            LookAtDirection();
+                LookAtDirection();
+            //}
         }
     }
 

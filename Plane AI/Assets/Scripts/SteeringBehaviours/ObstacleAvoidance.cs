@@ -18,7 +18,12 @@ public class ObstacleAvoidance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxAccelleration = controller.maxAcceleration;
+        if(GetComponent<SteeringController>())
+            maxAccelleration = controller.maxAcceleration;
+        if(GetComponent<ObstacleCourseAgent>())
+        {
+            maxAccelleration = GetComponent<ObstacleCourseAgent>().maxAcceleration;
+        }
     }
 
     // Update is called once per frame

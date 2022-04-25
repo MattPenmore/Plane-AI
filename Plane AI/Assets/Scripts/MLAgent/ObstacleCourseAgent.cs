@@ -51,9 +51,17 @@ public class ObstacleCourseAgent : Agent
 
     public List<GameObject> checkPoints;
 
+    List<Vector3> sightObservations = new List<Vector3>();
+    Vector3 targetDirection;
+
     [SerializeField]
     List<GameObject> startPositions;
     public bool reachedEnd = false;
+
+    float checkTime = 0;
+
+    [SerializeField]
+    float avoidanceStrength;
 
     public override void Initialize()
     {
@@ -67,6 +75,7 @@ public class ObstacleCourseAgent : Agent
         if(target)
         {
             sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position)/sight.maxSight);
+            targetDirection = target.transform.position - transform.position;
         }
 
         if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 27)
@@ -91,6 +100,13 @@ public class ObstacleCourseAgent : Agent
             foreach (float sightM in sight.sightMagnitudes)
             {
                 sensor.AddObservation(sightM / sight.maxSight);
+                
+            }
+
+            sightObservations.Clear();
+            foreach (Vector3 sight in sight.sightDirections)
+            {
+                sightObservations.Add(sight);
             }
         }
     }
@@ -108,29 +124,30 @@ public class ObstacleCourseAgent : Agent
 
         target = checkPoints[targetnumber];
 
-        Vector3 output = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
-        Vector3 newDirection = rb.velocity + transform.TransformDirection(output);
-        Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
-        //Quaternion oldRotation = transform.rotation;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
-        newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
-        //transform.rotation = oldRotation;
+         Vector3 output = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
+         Vector3 newDirection = rb.velocity + transform.TransformDirection(output);
+         Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
+         //Quaternion oldRotation = transform.rotation;
+         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+         newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
+         //transform.rotation = oldRotation;
 
-        if (newDirection.magnitude > maxVelocity)
-        {
-            rb.velocity = newDirection.normalized * maxVelocity;
-        }
-        else if (newDirection.magnitude < minVelocity)
-        {
-            rb.velocity = newDirection.normalized * minVelocity;
-        }
-        else
-        {
-            rb.velocity = newDirection;
-        }
+         if (newDirection.magnitude > maxVelocity)
+         {
+             rb.velocity = newDirection.normalized * maxVelocity;
+         }
+         else if (newDirection.magnitude < minVelocity)
+         {
+             rb.velocity = newDirection.normalized * minVelocity;
+         }
+         else
+         {
+             rb.velocity = newDirection;
+         }
 
-        curSpeed = rb.velocity.magnitude;
-        LookAtDirection();
+         curSpeed = rb.velocity.magnitude;
+         LookAtDirection();
+        checkTime = Time.time;
 
         if (oldTarget == target)
         {
@@ -198,24 +215,33 @@ public class ObstacleCourseAgent : Agent
     }
     public override void Heuristic(float[] actionsOut)
     {
-        Vector3 newDirection = rb.velocity + new Vector3(actionsOut[0], actionsOut[1], actionsOut[2]) * maxAcceleration;
-        newDirection = Vector3.RotateTowards(transform.TransformDirection(Vector3.forward), newDirection.normalized, turnSpeed * Time.deltaTime, 0.0f) * newDirection.magnitude;
+        Vector3 avoidanceDirection = Vector3.zero;
+        int i = 0;
+        foreach (Vector3 objPos in sightObservations)
+        {
+            float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
 
-        if (newDirection.magnitude > maxVelocity)
-        {
-            rb.velocity = newDirection.normalized * maxVelocity;
-        }
-        else if (newDirection.magnitude < minVelocity)
-        {
-            rb.velocity = newDirection.normalized * minVelocity;
-        }
-        else
-        {
-            rb.velocity = newDirection;
+            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude * avoidanceStrength;
+            i++;
         }
 
-        curSpeed = rb.velocity.magnitude;
-        LookAtDirection();
+        if (avoidanceDirection.magnitude > maxAcceleration)
+            avoidanceDirection = avoidanceDirection.normalized * maxAcceleration;
+
+        
+        Vector3 avoidanceForce = avoidanceDirection;
+        Vector3 seekForce = targetDirection.normalized * maxAcceleration;
+
+        float avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
+        float seekRatio = 1 - avoidanceRatio;
+        Vector3 desiredDirection = avoidanceForce * avoidanceRatio + seekForce * seekRatio;
+
+        Vector3 localDir = transform.InverseTransformDirection(desiredDirection) / maxAcceleration;
+
+        actionsOut[0] = localDir.x;
+        actionsOut[1] = localDir.y;
+        actionsOut[2] = localDir.z;
+
     }
     public override void OnEpisodeBegin()
     {
@@ -267,7 +293,7 @@ public class ObstacleCourseAgent : Agent
 
     public void ResetPlane()
     {
-        startPos = Random.Range(0,numCheckPoints);
+        startPos = Random.Range(0, numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;

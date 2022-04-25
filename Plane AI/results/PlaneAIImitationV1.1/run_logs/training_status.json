@@ -1,0 +1,300 @@
+{
+    "ObstacleCourseAI": {
+        "checkpoints": [
+            {
+                "steps": 279999784,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-279999784.nn",
+                "reward": 87560.34117542613,
+                "creation_time": 1650720830.5563977
+            },
+            {
+                "steps": 284999860,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-284999860.nn",
+                "reward": 70031.8791015625,
+                "creation_time": 1650724371.946553
+            },
+            {
+                "steps": 289999919,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-289999919.nn",
+                "reward": 69397.37637270414,
+                "creation_time": 1650728122.591421
+            },
+            {
+                "steps": 294999822,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-294999822.nn",
+                "reward": 77401.11798773872,
+                "creation_time": 1650731580.2688723
+            },
+            {
+                "steps": 299999857,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-299999857.nn",
+                "reward": 84062.43020450367,
+                "creation_time": 1650735006.6540828
+            },
+            {
+                "steps": 304999632,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-304999632.nn",
+                "reward": 65829.7467936198,
+                "creation_time": 1650738430.3745403
+            },
+            {
+                "steps": 309999696,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-309999696.nn",
+                "reward": 80655.67377090454,
+                "creation_time": 1650741854.105681
+            },
+            {
+                "steps": 314999673,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-314999673.nn",
+                "reward": 95336.13727678571,
+                "creation_time": 1650745277.994987
+            },
+            {
+                "steps": 319999975,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-319999975.nn",
+                "reward": 81930.6334269597,
+                "creation_time": 1650748696.9227695
+            },
+            {
+                "steps": 324999628,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-324999628.nn",
+                "reward": 78696.51171875,
+                "creation_time": 1650752241.1288168
+            },
+            {
+                "steps": 329999775,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-329999775.nn",
+                "reward": 65247.02915485088,
+                "creation_time": 1650755704.608063
+            },
+            {
+                "steps": 334999654,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-334999654.nn",
+                "reward": 95217.5625,
+                "creation_time": 1650759137.5646694
+            },
+            {
+                "steps": 339999580,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-339999580.nn",
+                "reward": 64140.29311843145,
+                "creation_time": 1650762571.6816897
+            },
+            {
+                "steps": 344999731,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-344999731.nn",
+                "reward": 95009.798828125,
+                "creation_time": 1650766006.052379
+            },
+            {
+                "steps": 349999468,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-349999468.nn",
+                "reward": 87763.29598097368,
+                "creation_time": 1650769438.3041625
+            },
+            {
+                "steps": 354999747,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-354999747.nn",
+                "reward": 95267.38888888889,
+                "creation_time": 1650772872.491027
+            },
+            {
+                "steps": 359999942,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-359999942.nn",
+                "reward": 86228.85126842152,
+                "creation_time": 1650776307.2819295
+            },
+            {
+                "steps": 364999674,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-364999674.nn",
+                "reward": 61722.68298857553,
+                "creation_time": 1650779739.0568285
+            },
+            {
+                "steps": 369999859,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-369999859.nn",
+                "reward": 75656.31184864044,
+                "creation_time": 1650783174.468081
+            },
+            {
+                "steps": 374999914,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-374999914.nn",
+                "reward": 86664.50260416667,
+                "creation_time": 1650786616.9044697
+            },
+            {
+                "steps": 379999938,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-379999938.nn",
+                "reward": null,
+                "creation_time": 1650790057.8581889
+            },
+            {
+                "steps": 384999715,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-384999715.nn",
+                "reward": 78927.50666198731,
+                "creation_time": 1650793504.520155
+            },
+            {
+                "steps": 389999564,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-389999564.nn",
+                "reward": 51433.09159088135,
+                "creation_time": 1650797015.388374
+            },
+            {
+                "steps": 394999712,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-394999712.nn",
+                "reward": 66908.1950232188,
+                "creation_time": 1650800551.722715
+            },
+            {
+                "steps": 399999684,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-399999684.nn",
+                "reward": 81618.20191955566,
+                "creation_time": 1650804120.7123656
+            },
+            {
+                "steps": 404999705,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-404999705.nn",
+                "reward": 85354.85160024543,
+                "creation_time": 1650807873.237698
+            },
+            {
+                "steps": 409999545,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-409999545.nn",
+                "reward": 87344.12349759616,
+                "creation_time": 1650811680.9074135
+            },
+            {
+                "steps": 414999781,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-414999781.nn",
+                "reward": 81894.67447916667,
+                "creation_time": 1650815271.0553243
+            },
+            {
+                "steps": 419999887,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-419999887.nn",
+                "reward": 82619.17540130616,
+                "creation_time": 1650818897.7665458
+            },
+            {
+                "steps": 424999963,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-424999963.nn",
+                "reward": 61068.99652481079,
+                "creation_time": 1650822522.8248403
+            },
+            {
+                "steps": 429999771,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-429999771.nn",
+                "reward": 82846.3848438263,
+                "creation_time": 1650826299.224132
+            },
+            {
+                "steps": 434999980,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-434999980.nn",
+                "reward": 75921.95553534372,
+                "creation_time": 1650829934.063149
+            },
+            {
+                "steps": 439999618,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-439999618.nn",
+                "reward": 78724.90399722049,
+                "creation_time": 1650833507.4724152
+            },
+            {
+                "steps": 444999535,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-444999535.nn",
+                "reward": 90564.67682291666,
+                "creation_time": 1650837111.7502005
+            },
+            {
+                "steps": 449999912,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-449999912.nn",
+                "reward": 95059.98567708333,
+                "creation_time": 1650840697.8657165
+            },
+            {
+                "steps": 454999810,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-454999810.nn",
+                "reward": 79936.57881774902,
+                "creation_time": 1650844145.5153284
+            },
+            {
+                "steps": 459999670,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-459999670.nn",
+                "reward": 90292.17228190105,
+                "creation_time": 1650847578.877543
+            },
+            {
+                "steps": 464999838,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-464999838.nn",
+                "reward": 90571.951171875,
+                "creation_time": 1650851009.1646214
+            },
+            {
+                "steps": 469999954,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-469999954.nn",
+                "reward": 72976.99594254927,
+                "creation_time": 1650854440.9141395
+            },
+            {
+                "steps": 474999673,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-474999673.nn",
+                "reward": 82998.86495535714,
+                "creation_time": 1650857871.582607
+            },
+            {
+                "steps": 479999873,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-479999873.nn",
+                "reward": 91083.18394886363,
+                "creation_time": 1650861300.502879
+            },
+            {
+                "steps": 484999909,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-484999909.nn",
+                "reward": 89166.39855194092,
+                "creation_time": 1650864733.0692518
+            },
+            {
+                "steps": 489999851,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-489999851.nn",
+                "reward": 69038.12331125472,
+                "creation_time": 1650868164.42606
+            },
+            {
+                "steps": 494999594,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-494999594.nn",
+                "reward": 71533.87253281166,
+                "creation_time": 1650871594.1611595
+            },
+            {
+                "steps": 499999508,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-499999508.nn",
+                "reward": 82076.49692007211,
+                "creation_time": 1650875025.6289217
+            },
+            {
+                "steps": 504999648,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-504999648.nn",
+                "reward": 79778.23740748355,
+                "creation_time": 1650878464.0054257
+            },
+            {
+                "steps": 507538862,
+                "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-507538862.nn",
+                "reward": 85594.86796875,
+                "creation_time": 1650880355.261074
+            },
+
+        ],
+        "final_checkpoint": {
+            "steps": 507538862,
+            "file_path": "results\\PlaneAIImitationV1.1\\ObstacleCourseAI\\ObstacleCourseAI-507538862.nn",
+            "reward": 85594.86796875,
+            "creation_time": 1650880355.261074
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.1.0",
+        "mlagents_version": "0.20.0",
+        "tensorflow_version": "2.7.1"
+    }
+}

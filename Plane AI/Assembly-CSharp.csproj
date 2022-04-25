@@ -69,6 +69,7 @@
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Procedural Mesh\ExtrudeRandomEdges.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\PlanePathfinding.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\MLAgent\SteeringHybrid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_ScrollHighlight.shader" />
