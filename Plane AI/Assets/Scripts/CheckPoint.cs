@@ -6,8 +6,10 @@ public class CheckPoint : MonoBehaviour
 {
     public PlanePathfinding[] planes;
     public ObstacleCourseAgent[] MLPlanes;
+    public SteeringHybrid[] HybridPlanes;
     public List<bool> planeReachedTarget = new List<bool>();
     public List<bool> MLPlaneReachedTarget = new List<bool>();
+    public List<bool> HybridPlaneReachedTarget = new List<bool>();
 
     private void Awake()
     {
@@ -21,6 +23,12 @@ public class CheckPoint : MonoBehaviour
         foreach(PlanePathfinding plane in planes)
         {
             planeReachedTarget.Add(false);
+        }
+
+        HybridPlanes = FindObjectsOfType<SteeringHybrid>();
+        foreach (SteeringHybrid plane in HybridPlanes)
+        {
+            HybridPlaneReachedTarget.Add(false);
         }
     }
 
@@ -49,6 +57,32 @@ public class CheckPoint : MonoBehaviour
                 other.transform.root.GetComponent<ObstacleCourseAgent>().checkPointsReached++;
                 other.transform.root.GetComponent<ObstacleCourseAgent>().targetnumber++;
                 MLPlaneReachedTarget[System.Array.IndexOf(MLPlanes, other.transform.root.GetComponent<ObstacleCourseAgent>())] = true;
+            }
+        }
+
+        if (other.transform.root.GetComponent<SteeringHybrid>())
+        {
+            if (other.transform.root.GetComponent<SteeringHybrid>().target == transform.parent.gameObject && HybridPlaneReachedTarget[System.Array.IndexOf(HybridPlanes, other.transform.root.GetComponent<SteeringHybrid>())] == false)
+            {
+                other.transform.root.GetComponent<SteeringHybrid>().checkPointsReached++;
+                other.transform.root.GetComponent<SteeringHybrid>().targetnumber++;
+                HybridPlaneReachedTarget[System.Array.IndexOf(HybridPlanes, other.transform.root.GetComponent<SteeringHybrid>())] = true;
+
+                if (other.transform.root.GetComponent<SteeringHybrid>().checkPointsReached <= other.transform.root.GetComponent<SteeringHybrid>().numCheckPoints)
+                {
+                    if (other.transform.root.GetComponent<SteeringHybrid>().targetnumber >= other.transform.root.GetComponent<SteeringHybrid>().numCheckPoints)
+                    {
+                        other.transform.root.GetComponent<SteeringHybrid>().targetnumber -= other.transform.root.GetComponent<SteeringHybrid>().numCheckPoints;
+                    }
+
+                    other.transform.root.GetComponent<SteeringHybrid>().target = other.transform.root.GetComponent<SteeringHybrid>().checkPoints[other.transform.root.GetComponent<SteeringHybrid>().targetnumber];
+                }
+            }
+            else if (other.transform.root.GetComponent<SteeringHybrid>().target == transform.parent.gameObject && other.transform.root.GetComponent<SteeringHybrid>().numCheckPoints == other.transform.root.GetComponent<SteeringHybrid>().checkPointsReached)
+            {
+                other.transform.root.GetComponent<SteeringHybrid>().checkPointsReached++;
+                other.transform.root.GetComponent<SteeringHybrid>().targetnumber++;
+                HybridPlaneReachedTarget[System.Array.IndexOf(HybridPlanes, other.transform.root.GetComponent<SteeringHybrid>())] = true;
             }
         }
 

@@ -9,3 +9,5 @@ mlagents-learn config/ObstacleCourseAI3.yaml --run-id=PlaneAIV5.5 --time-scale 2
 
 mlagents-learn config/ObstacleCourseAIImitation.yaml --run-id=PlaneAIImitationV1.1 --time-scale 2 (Imitation V1)
 
+mlagents-learn config/ObstacleCourseAI3.yaml --run-id=PlaneAIHybridV1.4 --time-scale 2 --resume
+

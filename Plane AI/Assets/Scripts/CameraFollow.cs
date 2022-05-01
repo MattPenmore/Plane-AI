@@ -18,11 +18,14 @@ public class CameraFollow : MonoBehaviour
     float lerpSpeed;
 
     public bool isMLAgents;
+    public bool isHybrid;
     public ObstacleCourseAgent[] MLAgents;
+    public SteeringHybrid[] MLHybrids;
     // Start is called before the first frame update
     void Start()
     {
         MLAgents = FindObjectsOfType<ObstacleCourseAgent>();
+        MLHybrids = FindObjectsOfType<SteeringHybrid>();
     }
 
     // Update is called once per frame
@@ -35,6 +38,19 @@ public class CameraFollow : MonoBehaviour
             foreach(ObstacleCourseAgent agent in MLAgents)
             {
                 if(agent.reward > bestReward)
+                {
+                    bestReward = agent.reward;
+                    plane = agent.gameObject;
+                }
+            }
+        }
+        else if (isHybrid)
+        {
+            float bestReward = 0;
+
+            foreach (SteeringHybrid agent in MLHybrids)
+            {
+                if (agent.reward > bestReward)
                 {
                     bestReward = agent.reward;
                     plane = agent.gameObject;

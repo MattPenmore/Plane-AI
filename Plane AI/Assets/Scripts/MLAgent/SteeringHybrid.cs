@@ -84,28 +84,18 @@ public class SteeringHybrid : Agent
                 sensor.AddObservation(sightM / sight.maxSight);
             }
 
-            sightObservations.Clear();
-            foreach (Vector3 sight in sight.sightDirections)
-            {
-                sightObservations.Add(sight);
-            }
-
             avoidanceDirection = Vector3.zero;
             int i = 0;
-            foreach (Vector3 objPos in sightObservations)
+            foreach (Vector3 sightDir in sight.sightDirections)
             {
                 float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
 
-                avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude;
+                avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude * 5;
                 i++;
             }
 
-            if (avoidanceDirection.magnitude > maxAcceleration)
-                avoidanceDirection = avoidanceDirection.normalized * maxAcceleration;
-
-
             Vector3 avoidanceForce = transform.InverseTransformDirection(avoidanceDirection) / maxAcceleration;
-            sightObservations.Add(avoidanceForce);
+            sensor.AddObservation(avoidanceForce);
         }
     }
     public override void OnActionReceived(float[] vectorAction)
@@ -123,11 +113,12 @@ public class SteeringHybrid : Agent
         target = checkPoints[targetnumber];
 
         float avoidanceRatio = vectorAction[0];
-        float avoidanceStrength = (vectorAction[1] + 1) * 5;
+        float avoidanceStrength = vectorAction[1] * 2;
+        float seekStrength = vectorAction[2];
         Vector3 avoidanceVector = avoidanceDirection * avoidanceStrength;
         if (avoidanceVector.magnitude > maxAcceleration)
             avoidanceVector = avoidanceVector.normalized * maxAcceleration;
-        Vector3 newDirection = rb.velocity + targetDirection.normalized * maxAcceleration * (1 - avoidanceRatio) + avoidanceVector * avoidanceRatio;
+        Vector3 newDirection = rb.velocity + targetDirection.normalized * maxAcceleration * (1 - avoidanceRatio) * seekStrength + avoidanceVector * avoidanceRatio;
         Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
         //Quaternion oldRotation = transform.rotation;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
@@ -314,9 +305,9 @@ public class SteeringHybrid : Agent
 
         foreach (GameObject checkPoint in checkPoints)
         {
-            if (checkPoint.GetComponentInChildren<CheckPoint>().MLPlaneReachedTarget.Count >= 1)
+            if (checkPoint.GetComponentInChildren<CheckPoint>().HybridPlaneReachedTarget.Count >= 1)
             {
-                checkPoint.GetComponentInChildren<CheckPoint>().MLPlaneReachedTarget[System.Array.IndexOf(checkPoint.GetComponentInChildren<CheckPoint>().MLPlanes, GetComponent<ObstacleCourseAgent>())] = false;
+                checkPoint.GetComponentInChildren<CheckPoint>().HybridPlaneReachedTarget[System.Array.IndexOf(checkPoint.GetComponentInChildren<CheckPoint>().HybridPlanes, GetComponent<SteeringHybrid>())] = false;
             }
         }
     }
