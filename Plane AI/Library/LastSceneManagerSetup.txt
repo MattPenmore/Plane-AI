@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/ObstacleCourseAI.unity
+- path: Assets/Scenes/ObstacleCourseAI Difficult.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

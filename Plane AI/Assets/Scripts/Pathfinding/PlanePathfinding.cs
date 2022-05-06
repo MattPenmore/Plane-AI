@@ -84,9 +84,12 @@ public class PlanePathfinding : MonoBehaviour
             //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
             GetComponent<Rigidbody>().velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * 50;
         }
-            checkPointsReached = 0;
-            reachedEnd = false;
-            hasCrashed = false;
+        if(hasCrashed)
+            numReachedEnd.crashedAmount++;
+
+        checkPointsReached = 0;
+        reachedEnd = false;
+        hasCrashed = false;
 
         foreach (GameObject checkPoint in checkPoints)
         {
@@ -102,7 +105,7 @@ public class PlanePathfinding : MonoBehaviour
         if (!hasCrashed && !reachedEnd)
         {
             hasCrashed = true;;
-            numReachedEnd.crashedAmount++;
+            //numReachedEnd.crashedAmount++;
             ResetPlane();
         }
     }

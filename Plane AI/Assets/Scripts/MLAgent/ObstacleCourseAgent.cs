@@ -293,7 +293,7 @@ public class ObstacleCourseAgent : Agent
 
     public void ResetPlane()
     {
-        startPos = Random.Range(0, numCheckPoints);
+        startPos = 1;//Random.Range(0, numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;
