@@ -50,7 +50,7 @@ public class SteeringController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!hasCrashed)
+        if((!hasCrashed) && Time.time > 2 && rb.velocity != Vector3.zero)
         {
             avoidanceForce = avoidance.avoidanceForce;
             seekForce = seek.seekForce;
@@ -85,6 +85,14 @@ public class SteeringController : MonoBehaviour
                 curSpeed = rb.velocity.magnitude;
                 LookAtDirection();
             //}
+        }
+        else if (Time.time < 2)
+        {
+            rb.velocity = Vector3.zero;
+        }
+        else
+        {
+            rb.velocity = transform.TransformDirection(Vector3.forward) * 100;
         }
     }
 

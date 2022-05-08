@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class NumReachedEnd : MonoBehaviour
 {
+    [SerializeField]
+    string name;
+
     public int reachEndAmount = 0;
     public int crashedAmount = 0;
-
 
     [SerializeField]
     Text reachedEnd;

@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         Time.timeScale = timeScale;
-        if (!reachedEnd)
+        if (!reachedEnd && Time.time > 2)
         {
             time += Time.deltaTime;
 

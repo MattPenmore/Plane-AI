@@ -61,6 +61,12 @@ public class SteeringHybrid : Agent
 
     float checkTime = 0;
 
+    [SerializeField]
+    NumReachedEnd numReachedEnd;
+
+    [SerializeField]
+    Timer timer;
+
     public override void Initialize()
     {
         defaultParameters = Academy.Instance.EnvironmentParameters;
@@ -100,110 +106,123 @@ public class SteeringHybrid : Agent
     }
     public override void OnActionReceived(float[] vectorAction)
     {
-        if (checkPointsReached > numCheckPoints && !reachedEnd)
+        if(Time.time > 2)
         {
-            reachedEnd = true;
-        }
 
-        if (targetnumber >= numCheckPoints)
-        {
-            targetnumber -= numCheckPoints;
-        }
-
-        target = checkPoints[targetnumber];
-
-        float avoidanceRatio = vectorAction[0];
-        float avoidanceStrength = vectorAction[1] * 2;
-        float seekStrength = vectorAction[2];
-        Vector3 avoidanceVector = avoidanceDirection * avoidanceStrength;
-        if (avoidanceVector.magnitude > maxAcceleration)
-            avoidanceVector = avoidanceVector.normalized * maxAcceleration;
-        Vector3 newDirection = rb.velocity + targetDirection.normalized * maxAcceleration * (1 - avoidanceRatio) * seekStrength + avoidanceVector * avoidanceRatio;
-        Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
-        //Quaternion oldRotation = transform.rotation;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
-        newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
-        //transform.rotation = oldRotation;
-
-        if (newDirection.magnitude > maxVelocity)
-        {
-            rb.velocity = newDirection.normalized * maxVelocity;
-        }
-        else if (newDirection.magnitude < minVelocity)
-        {
-            rb.velocity = newDirection.normalized * minVelocity;
-        }
-        else
-        {
-            rb.velocity = newDirection;
-        }
-
-        curSpeed = rb.velocity.magnitude;
-        LookAtDirection();
-        checkTime = Time.time;
-
-        if (oldTarget == target)
-        {
-            distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
-            if (distanceToTarget < prevDistance)
+            if (checkPointsReached > numCheckPoints && !reachedEnd)
             {
-                AddReward(prevDistance - distanceToTarget);
-                reward += prevDistance - distanceToTarget;
-                rewardTime = Time.time;
-                if (distanceToTarget < prevDistanceReached)
+                reachedEnd = true;
+            }
+
+            if (targetnumber >= numCheckPoints)
+            {
+                targetnumber -= numCheckPoints;
+            }
+
+            target = checkPoints[targetnumber];
+
+            float avoidanceRatio = vectorAction[0];
+            float avoidanceStrength = vectorAction[1] * 2;
+            float seekStrength = vectorAction[2];
+            Vector3 avoidanceVector = avoidanceDirection * avoidanceStrength;
+            if (avoidanceVector.magnitude > maxAcceleration)
+                avoidanceVector = avoidanceVector.normalized * maxAcceleration;
+            Vector3 newDirection = rb.velocity + targetDirection.normalized * maxAcceleration * (1 - avoidanceRatio) * seekStrength + avoidanceVector * avoidanceRatio;
+            Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
+            //Quaternion oldRotation = transform.rotation;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+            newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
+            //transform.rotation = oldRotation;
+
+            if (newDirection.magnitude > maxVelocity)
+            {
+                rb.velocity = newDirection.normalized * maxVelocity;
+            }
+            else if (newDirection.magnitude < minVelocity)
+            {
+                rb.velocity = newDirection.normalized * minVelocity;
+            }
+            else
+            {
+                rb.velocity = newDirection;
+            }
+
+            curSpeed = rb.velocity.magnitude;
+            LookAtDirection();
+            checkTime = Time.time;
+
+            if (oldTarget == target)
+            {
+                distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
+                if (distanceToTarget < prevDistance)
                 {
-                    prevDistanceReached = distanceToTarget;
-                    timeGotCloser = Time.time;
+                    AddReward(prevDistance - distanceToTarget);
+                    reward += prevDistance - distanceToTarget;
+                    rewardTime = Time.time;
+                    if (distanceToTarget < prevDistanceReached)
+                    {
+                        prevDistanceReached = distanceToTarget;
+                        timeGotCloser = Time.time;
+                    }
+                    prevDistance = distanceToTarget;
                 }
-                prevDistance = distanceToTarget;
+                else if (prevDistance < distanceToTarget)
+                {
+                    AddReward(prevDistance - distanceToTarget);
+                    reward += prevDistance - distanceToTarget;
+
+                    prevDistance = distanceToTarget;
+
+                }
             }
-            else if (prevDistance < distanceToTarget)
+            else
             {
-                AddReward(prevDistance - distanceToTarget);
-                reward += prevDistance - distanceToTarget;
-
-                prevDistance = distanceToTarget;
-
+                oldTarget = target;
+                distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
+                prevDistanceReached = distanceToTarget;
+                AddReward(2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000));
+                reward += 2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000);
+                rewardTime = Time.time;
+                timeGotCloser = Time.time;
+                timeTargetReached = Time.time;
+                Debug.Log(checkPointsReached);
             }
+
+            if (reachedEnd)
+            {
+                AddReward(20000);
+                reward += 20000;
+                rewardTime = Time.time;
+                numReachedEnd.reachEndAmount++;
+                EndEpisode();
+            }
+            else if (hasCrashed /*|| transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10*/ /*|| Time.time - timeTargetReached > 20*/)
+            {
+                //if(checkPointsReached != 0)
+                //{
+                //    if(targetnumber != 0)
+                //    {
+                //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[targetnumber - 1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
+                //    }
+                //    else
+                //    {
+                //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[numCheckPoints -1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
+                //    }
+                //}
+
+                rewardTime = Time.time;
+                timeTargetReached = Time.time;
+                timeGotCloser = Time.time;
+                EndEpisode();
+            }
+        }
+        else if (Time.time < 2)
+        {
+            rb.velocity = Vector3.zero;
         }
         else
         {
-            oldTarget = target;
-            distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
-            prevDistanceReached = distanceToTarget;
-            AddReward(2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000));
-            reward += 2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000);
-            rewardTime = Time.time;
-            timeGotCloser = Time.time;
-            timeTargetReached = Time.time;
-            Debug.Log(checkPointsReached);
-        }
-
-        if (reachedEnd)
-        {
-            AddReward(20000);
-            reward += 20000;
-            rewardTime = Time.time;
-            EndEpisode();
-        }
-        else if (hasCrashed || transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10 /*|| Time.time - timeTargetReached > 20*/)
-        {
-            //if(checkPointsReached != 0)
-            //{
-            //    if(targetnumber != 0)
-            //    {
-            //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[targetnumber - 1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
-            //    }
-            //    else
-            //    {
-            //        AddReward(Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - checkPoints[numCheckPoints -1].transform.position)) - Mathf.Abs(Vector3.Magnitude(checkPoints[targetnumber].transform.position - transform.position)));
-            //    }
-            //}
-
-            rewardTime = Time.time;
-            timeTargetReached = Time.time;
-            timeGotCloser = Time.time;
-            EndEpisode();
+            rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * minVelocity;
         }
     }
     public override void Heuristic(float[] actionsOut)
@@ -286,7 +305,7 @@ public class SteeringHybrid : Agent
 
     public void ResetPlane()
     {
-        startPos = 0;//Random.Range(0, numCheckPoints);
+        startPos = 1;//Random.Range(0, numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;
@@ -295,8 +314,13 @@ public class SteeringHybrid : Agent
         //cam.transform.rotation = startPositions[startPos].transform.rotation;
         //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
         checkPointsReached = 0;
+
+        if (hasCrashed)
+            numReachedEnd.crashedAmount++;
+
         reachedEnd = false;
         hasCrashed = false;
+        timer.time = 0;
         //body.transform.rotation = Quaternion.identity;
         distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
         prevDistanceReached = distanceToTarget;

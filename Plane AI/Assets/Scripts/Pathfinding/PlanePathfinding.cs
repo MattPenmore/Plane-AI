@@ -6,7 +6,7 @@ public class PlanePathfinding : MonoBehaviour
 {
     public GameObject target;
     [SerializeField]
-    Camera cam;
+    //Camera cam;
 
     public int checkPointsReached = 0;
     public int numCheckPoints;
@@ -21,18 +21,20 @@ public class PlanePathfinding : MonoBehaviour
     public Vector3 seekForce;
     float maxAccelleration = 50;
 
+    [SerializeField]
     Timer timer;
     public bool reachedEnd = false;
 
+    [SerializeField]
     NumReachedEnd numReachedEnd;
     bool hasCrashed = false;
 
     private void Awake()
     {
-        numReachedEnd = FindObjectOfType<NumReachedEnd>();
-        timer = FindObjectOfType<Timer>();
+        //numReachedEnd = FindObjectOfType<NumReachedEnd>();
+        //timer = FindObjectOfType<Timer>();
         numCheckPoints = checkPoints.Count;
-        cam = Camera.main;
+        //cam = Camera.main;
 
         ResetPlane();
     }
@@ -40,6 +42,12 @@ public class PlanePathfinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hasCrashed)
+        {
+            ResetPlane();
+            return;
+        }
+
         if(checkPointsReached > numCheckPoints && !reachedEnd)
         {
             //timer.reachedEnd = true;
@@ -82,7 +90,7 @@ public class PlanePathfinding : MonoBehaviour
             transform.rotation = startPositions[startPos].transform.rotation;
             //cam.transform.rotation = startPositions[startPos].transform.rotation;
             //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
-            GetComponent<Rigidbody>().velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * 50;
+            GetComponent<Rigidbody>().velocity = transform.TransformDirection(Vector3.forward) * 100;
         }
         if(hasCrashed)
             numReachedEnd.crashedAmount++;
@@ -90,7 +98,7 @@ public class PlanePathfinding : MonoBehaviour
         checkPointsReached = 0;
         reachedEnd = false;
         hasCrashed = false;
-
+        timer.time = 0;
         foreach (GameObject checkPoint in checkPoints)
         {
             if (checkPoint.GetComponentInChildren<CheckPoint>().planeReachedTarget.Count >= 1)
@@ -106,7 +114,7 @@ public class PlanePathfinding : MonoBehaviour
         {
             hasCrashed = true;;
             //numReachedEnd.crashedAmount++;
-            ResetPlane();
+            //ResetPlane();
         }
     }
 }
