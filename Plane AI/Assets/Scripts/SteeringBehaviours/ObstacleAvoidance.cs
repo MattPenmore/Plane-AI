@@ -18,12 +18,8 @@ public class ObstacleAvoidance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GetComponent<SteeringController>())
-            maxAccelleration = controller.maxAcceleration;
-        if(GetComponent<ObstacleCourseAgent>())
-        {
-            maxAccelleration = GetComponent<ObstacleCourseAgent>().maxAcceleration;
-        }
+        maxAccelleration = controller.maxAcceleration;
+
     }
 
     // Update is called once per frame
@@ -36,6 +32,7 @@ public class ObstacleAvoidance : MonoBehaviour
             return;
         }
         int i = 0;
+        //Add to avoidance force for each sight point, depending on distance and angle
         foreach (Vector3 objPos in sight.sightDirections)
         {
             float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
@@ -44,6 +41,7 @@ public class ObstacleAvoidance : MonoBehaviour
             i++;
         }
 
+        //Limit avoidance force to max accepted
         if (avoidanceDirection.magnitude > maxAccelleration)
             avoidanceDirection = avoidanceDirection.normalized * maxAccelleration;
 

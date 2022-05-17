@@ -31,6 +31,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Camera will follow the reinforcement/imitation agent with the highest reward
         if(isMLAgents)
         {
             float bestReward = 0;
@@ -44,6 +45,7 @@ public class CameraFollow : MonoBehaviour
                 }
             }
         }
+        //Camera will follow the hybrid agent with the highest reward
         else if (isHybrid)
         {
             float bestReward = 0;

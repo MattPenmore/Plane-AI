@@ -21,28 +21,27 @@ public class PlaneSight : MonoBehaviour
 
     public List<Vector3> sightDirections = new List<Vector3>();
     public float[] sightMagnitudes;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-        //numRayCasts = numRayCastsWidth * numRayCastsHeight;
-    }
 
     // Update is called once per frame
     void Update()
     {
         int k = 0;
         sightMagnitudes = new float[numRayCastsWidth * numRayCastsHeight];
+        //Clear previous data from sight directions
         sightDirections.Clear();
+        //Iterate through raycasts based on height and width data
         for (int i = 0; i < numRayCastsWidth; i++)
         {
             for (int j = 0; j < numRayCastsHeight; j++)
             {
+                //Get height and width of this raycast
                 float curWidth = -sightWidth + (sightWidth * 2 / numRayCastsWidth * i);
                 float curHeight = -sightHeight + (sightHeight * 2 / numRayCastsHeight * j);
 
+                //Get direction of raycast
                 Vector3 dir = (transform.right * curWidth) + (transform.up * curHeight) + (transform.forward * sightLength);
 
+                //If raycast hits an object add relative position of hit to sight directions and add distance to sight magnitudes
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, dir.normalized, out hit, maxSight, ~6))
                 {
@@ -50,6 +49,7 @@ public class PlaneSight : MonoBehaviour
                     sightDirections.Add(dir.normalized * hit.distance);
                     sightMagnitudes[k] = hit.distance;
                 }
+                //Otherwise assume max distance as hit distance
                 else
                 {
                     sightDirections.Add(dir.normalized * maxSight);

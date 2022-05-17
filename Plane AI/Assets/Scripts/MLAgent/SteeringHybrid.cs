@@ -8,7 +8,6 @@ using Unity.MLAgents.Sensors;
 public class SteeringHybrid : Agent
 {
     public float reward;
-
     float rewardTime = 0;
 
     [SerializeField]
@@ -76,6 +75,7 @@ public class SteeringHybrid : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
+        //If plane has a target add observation of local direction between plane and checkpoint
         if (target)
         {
             sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position) / sight.maxSight);
@@ -84,14 +84,17 @@ public class SteeringHybrid : Agent
 
         if (GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 28)
         {
+            //Add observation of plane velocity magnitude and normalize to between 0 and 1
             sensor.AddObservation((rb.velocity.magnitude - minVelocity) / (maxVelocity - minVelocity));
+            //Add observation of distance for each raycast point and normalise to between 0 and 1
             foreach (float sightM in sight.sightMagnitudes)
             {
                 sensor.AddObservation(sightM / sight.maxSight);
             }
-
+            //Reset avoidance direction
             avoidanceDirection = Vector3.zero;
             int i = 0;
+            //Add to avoidance force for each sight point, depending on distance and angle
             foreach (Vector3 sightDir in sight.sightDirections)
             {
                 float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
@@ -99,21 +102,23 @@ public class SteeringHybrid : Agent
                 avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude * 5;
                 i++;
             }
-
+            //Add observation of avoidance force
             Vector3 avoidanceForce = transform.InverseTransformDirection(avoidanceDirection) / maxAcceleration;
             sensor.AddObservation(avoidanceForce);
         }
     }
     public override void OnActionReceived(float[] vectorAction)
     {
-        if(Time.time > 2)
+        //If plane is moving and application has been running long enough
+        if (Time.time > 10 && rb.velocity != Vector3.zero)
         {
-
+            //Check if plane has reached end of course
             if (checkPointsReached > numCheckPoints && !reachedEnd)
             {
                 reachedEnd = true;
             }
 
+            //Loop checkpoints if neccesary
             if (targetnumber >= numCheckPoints)
             {
                 targetnumber -= numCheckPoints;
@@ -121,19 +126,26 @@ public class SteeringHybrid : Agent
 
             target = checkPoints[targetnumber];
 
+            //Set outputs of neural network as avoidance ratio, avoidance strength and seek strength
             float avoidanceRatio = vectorAction[0];
             float avoidanceStrength = vectorAction[1] * 2;
             float seekStrength = vectorAction[2];
+
+            //Set avoidance velocity as avoidance direction and strength.
             Vector3 avoidanceVector = avoidanceDirection * avoidanceStrength;
             if (avoidanceVector.magnitude > maxAcceleration)
                 avoidanceVector = avoidanceVector.normalized * maxAcceleration;
+
+            //combine original velocity, avoidance velocity and seek velocity, using outputs from neural net
             Vector3 newDirection = rb.velocity + targetDirection.normalized * maxAcceleration * (1 - avoidanceRatio) * seekStrength + avoidanceVector * avoidanceRatio;
             Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
-            //Quaternion oldRotation = transform.rotation;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
-            newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
-            //transform.rotation = oldRotation;
 
+            //Rotate plane towards new direction, with limit based on turn speed
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+            //Set new direction to direciton plane is facing
+            newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
+
+            //Limit speed to between max and min velocity
             if (newDirection.magnitude > maxVelocity)
             {
                 rb.velocity = newDirection.normalized * maxVelocity;
@@ -148,38 +160,44 @@ public class SteeringHybrid : Agent
             }
 
             curSpeed = rb.velocity.magnitude;
-            LookAtDirection();
             checkTime = Time.time;
 
+            //If plane hasn't reached a new checkpoint
             if (oldTarget == target)
             {
+                //Get distance to next checkpoint
                 distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
+                //Reward agent if it gets closer to target
                 if (distanceToTarget < prevDistance)
                 {
                     AddReward(prevDistance - distanceToTarget);
                     reward += prevDistance - distanceToTarget;
                     rewardTime = Time.time;
-                    if (distanceToTarget < prevDistanceReached)
+                    //Set closet distrance to target plane has reached
+                    if(distanceToTarget < prevDistanceReached)
                     {
                         prevDistanceReached = distanceToTarget;
                         timeGotCloser = Time.time;
                     }
                     prevDistance = distanceToTarget;
                 }
-                else if (prevDistance < distanceToTarget)
+                //Punush plane if further from target
+                else if(prevDistance < distanceToTarget)
                 {
                     AddReward(prevDistance - distanceToTarget);
                     reward += prevDistance - distanceToTarget;
 
                     prevDistance = distanceToTarget;
-
                 }
             }
+            //If plane has reached a new checkpoint
             else
             {
                 oldTarget = target;
+                //Get distance to gext target
                 distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
                 prevDistanceReached = distanceToTarget;
+                //Reward agent based on time taked to reach checkpoint
                 AddReward(2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000));
                 reward += 2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000);
                 rewardTime = Time.time;
@@ -187,16 +205,24 @@ public class SteeringHybrid : Agent
                 timeTargetReached = Time.time;
                 Debug.Log(checkPointsReached);
             }
+            //If plane takes too long to reach a new checkpoint, treat it as being stuck and having crashed
+            if (Time.time - timeTargetReached > 20)
+                hasCrashed = true;
 
-            if (reachedEnd)
+            //Reward and reset plane if it reaches end of course
+            if(reachedEnd)
             {
                 AddReward(20000);
                 reward += 20000;
                 rewardTime = Time.time;
+
                 numReachedEnd.reachEndAmount++;
+                ResetPlane();
                 EndEpisode();
             }
-            else if (hasCrashed /*|| transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10*/ /*|| Time.time - timeTargetReached > 20*/)
+            //Reset plane if it has crashed
+            //Commented out code used for training
+            else if(hasCrashed /*|| transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10*/ /*|| Time.time - timeTargetReached > 20*/)
             {
                 //if(checkPointsReached != 0)
                 //{
@@ -213,10 +239,11 @@ public class SteeringHybrid : Agent
                 rewardTime = Time.time;
                 timeTargetReached = Time.time;
                 timeGotCloser = Time.time;
+                ResetPlane();
                 EndEpisode();
             }
         }
-        else if (Time.time < 2)
+        else if (Time.time < 10)
         {
             rb.velocity = Vector3.zero;
         }
@@ -227,33 +254,7 @@ public class SteeringHybrid : Agent
     }
     public override void Heuristic(float[] actionsOut)
     {
-        Vector3 avoidanceDirection = Vector3.zero;
-        int i = 0;
-        foreach (Vector3 objPos in sightObservations)
-        {
-            float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
-
-            avoidanceDirection -= (sight.sightDirections[i].normalized * sight.maxSight - sight.sightDirections[i]) / Mathf.Sqrt(angleToPoint) / sight.sightDirections[i].magnitude * 5;
-            i++;
-        }
-
-        if (avoidanceDirection.magnitude > maxAcceleration)
-            avoidanceDirection = avoidanceDirection.normalized * maxAcceleration;
-
-
-        Vector3 avoidanceForce = avoidanceDirection;
-        Vector3 seekForce = targetDirection.normalized * maxAcceleration;
-
-        float avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
-        float seekRatio = 1 - avoidanceRatio;
-        Vector3 desiredDirection = avoidanceForce * avoidanceRatio + seekForce * seekRatio;
-
-        Vector3 localDir = transform.InverseTransformDirection(desiredDirection) / maxAcceleration;
-
-        actionsOut[0] = localDir.x;
-        actionsOut[1] = localDir.y;
-        actionsOut[2] = localDir.z;
-
+        
     }
     public override void OnEpisodeBegin()
     {
@@ -264,37 +265,6 @@ public class SteeringHybrid : Agent
 
     }
 
-    public void LookAtDirection()
-    {
-        Vector3 direction = rb.velocity;
-        direction.Normalize();
-
-        /* If we have a non-zero direction then look towards that direciton otherwise do nothing */
-        if (direction.sqrMagnitude > 0.001f)
-        {
-            //Vector3 perp = Vector3.Cross(transform.forward, direction);
-            //float dir = Vector3.Dot(perp, transform.up);
-
-            //if (Mathf.Abs(dir) < 0.00005)
-            //{
-            //    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
-            //}
-            //else
-            //{
-            //    if (dir < 0)
-            //    {
-            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-            //    }
-            //    else
-            //    {
-            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-            //    }
-            //}
-
-            transform.rotation = Quaternion.LookRotation(direction);
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (!hasCrashed)
@@ -303,6 +273,7 @@ public class SteeringHybrid : Agent
         }
     }
 
+    //Reset all values and place plane back at start of the course
     public void ResetPlane()
     {
         startPos = 1;//Random.Range(0, numCheckPoints);
@@ -311,22 +282,23 @@ public class SteeringHybrid : Agent
         oldTarget = target;
         transform.position = startPositions[startPos].transform.position;
         transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
         checkPointsReached = 0;
 
+        //Increment number of times plane as completed or failed the course as neccessary
         if (hasCrashed)
             numReachedEnd.crashedAmount++;
+        if (reachedEnd)
+            numReachedEnd.checkTime = timer.time;
 
         reachedEnd = false;
         hasCrashed = false;
         timer.time = 0;
-        //body.transform.rotation = Quaternion.identity;
         distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
         prevDistanceReached = distanceToTarget;
         prevDistance = distanceToTarget;
-        rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * minVelocity;
+        rb.velocity = Vector3.zero;
 
+        //Reset checkpoint data on whether plane has reached it
         foreach (GameObject checkPoint in checkPoints)
         {
             if (checkPoint.GetComponentInChildren<CheckPoint>().HybridPlaneReachedTarget.Count >= 1)

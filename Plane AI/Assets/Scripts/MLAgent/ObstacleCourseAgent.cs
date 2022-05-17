@@ -8,7 +8,7 @@ using Unity.MLAgents.Sensors;
 public class ObstacleCourseAgent : Agent
 {
     public float reward;
-
+    bool resetting;
     float rewardTime = 0;
 
     [SerializeField]
@@ -78,54 +78,79 @@ public class ObstacleCourseAgent : Agent
     }
     public override void CollectObservations(VectorSensor sensor)
     {
-        if(target)
-        {
-            sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position)/sight.maxSight);
-            targetDirection = target.transform.position - transform.position;
-        }
-
+        //Used for reinforcement V2
         if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 27)
         {
+            //If plane has a target add observation of direction between plane and checkpoint
+            if (target)
+            {
+                sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position));
+                targetDirection = target.transform.position - transform.position;
+            }
+            //Add observation of plane velocity and normalize to between 0 and 1
             sensor.AddObservation(rb.velocity.normalized * (rb.velocity.magnitude - minVelocity)/(maxVelocity-minVelocity));
+            //Add observation of distance for each raycast point and normalise to between 0 and 1
             foreach(float sightM in sight.sightMagnitudes)
             {
                 sensor.AddObservation(sightM / sight.maxSight);
             }
         }
+        //Used for reinforcement V1
         else if(GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 69)
         {
+            //If plane has a target add observation of local direction between plane and checkpoint
+            if (target)
+            {
+                sensor.AddObservation(target.transform.position - transform.position);
+                targetDirection = target.transform.position - transform.position;
+            }
+            //Add observation of plane velocity
             sensor.AddObservation(rb.velocity);
+            //Add observation of relative position from plane of each raycast point
             foreach (Vector3 sight in sight.sightDirections)
             {
                 sensor.AddObservation(sight);
             }
         }
-        else if (GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 25)
+        //Used for reinforcement V3 and imitation
+        else if (GetComponent<BehaviorParameters>().BrainParameters.VectorObservationSize == 25 && !resetting)
         {
+            //If plane has a target add observation of local direction between plane and checkpoint
+            if (target)
+            {
+                sensor.AddObservation(transform.InverseTransformDirection(target.transform.position - transform.position) / sight.maxSight);
+                targetDirection = target.transform.position - transform.position;
+            }
+            //Add observation of plane velocity magnitude and normalize to between 0 and 1
             sensor.AddObservation((rb.velocity.magnitude - minVelocity) / (maxVelocity - minVelocity));
+            //Add observation of distance for each raycast point and normalise to between 0 and 1
             foreach (float sightM in sight.sightMagnitudes)
             {
                 sensor.AddObservation(sightM / sight.maxSight);
                 
             }
 
+            //create list of sight positions for heuristic method
             sightObservations.Clear();
             foreach (Vector3 sight in sight.sightDirections)
             {
                 sightObservations.Add(sight);
             }
         }
+        resetting = false;
     }
     public override void OnActionReceived(float[] vectorAction)
     {
-        if(Time.time > 2 && rb.velocity != Vector3.zero)
+        //If plane is moving and application has been running long enough
+        if(Time.time > 10 && rb.velocity != Vector3.zero)
         {
-
+            //Check if plane has reached end of course
             if (checkPointsReached > numCheckPoints && !reachedEnd)
             {
                 reachedEnd = true;
             }
 
+            //Loop checkpoints if neccesary
             if (targetnumber >= numCheckPoints)
             {
                 targetnumber -= numCheckPoints;
@@ -133,39 +158,46 @@ public class ObstacleCourseAgent : Agent
 
             target = checkPoints[targetnumber];
 
-             Vector3 output = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
-             Vector3 newDirection = rb.velocity + transform.TransformDirection(output);
-             Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
-             //Quaternion oldRotation = transform.rotation;
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
-             newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
-             //transform.rotation = oldRotation;
+            //Set output of neural network as directional velocity.
+            Vector3 output = new Vector3(vectorAction[0], vectorAction[1], vectorAction[2]) * maxAcceleration;
+            //Add output velocity and previous velocity to get new direction
+            Vector3 newDirection = rb.velocity + transform.TransformDirection(output);
+            Vector3 localVel = transform.InverseTransformDirection(rb.velocity);
 
-             if (newDirection.magnitude > maxVelocity)
-             {
-                 rb.velocity = newDirection.normalized * maxVelocity;
-             }
-             else if (newDirection.magnitude < minVelocity)
-             {
-                 rb.velocity = newDirection.normalized * minVelocity;
-             }
-             else
-             {
-                 rb.velocity = newDirection;
-             }
+            //Rotate plane towards new direction, with limit based on turn speed
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(newDirection), turnSpeed * Time.deltaTime);
+            //Set new direction to direciton plane is facing
+            newDirection = transform.TransformDirection(localVel * newDirection.magnitude);
 
-             curSpeed = rb.velocity.magnitude;
-             LookAtDirection();
+            //Limit speed to between max and min velocity
+            if (newDirection.magnitude > maxVelocity)
+            {
+                rb.velocity = newDirection.normalized * maxVelocity;
+            }
+            else if (newDirection.magnitude < minVelocity)
+            {
+                rb.velocity = newDirection.normalized * minVelocity;
+            }
+            else
+            {
+                rb.velocity = newDirection;
+            }
+
+            curSpeed = rb.velocity.magnitude;
             checkTime = Time.time;
 
+            //If plane hasn't reached a new checkpoint
             if (oldTarget == target)
             {
+                //Get distance to next checkpoint
                 distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
+                //Reward agent if it gets closer to target
                 if (distanceToTarget < prevDistance)
                 {
                     AddReward(prevDistance - distanceToTarget);
                     reward += prevDistance - distanceToTarget;
                     rewardTime = Time.time;
+                    //Set closet distrance to target plane has reached
                     if(distanceToTarget < prevDistanceReached)
                     {
                         prevDistanceReached = distanceToTarget;
@@ -173,20 +205,23 @@ public class ObstacleCourseAgent : Agent
                     }
                     prevDistance = distanceToTarget;
                 }
+                //Punush plane if further from target
                 else if(prevDistance < distanceToTarget)
                 {
                     AddReward(prevDistance - distanceToTarget);
                     reward += prevDistance - distanceToTarget;
 
                     prevDistance = distanceToTarget;
-
                 }
             }
-            else if(Time.time < 2)
+            //If plane has reached a new checkpoint
+            else
             {
                 oldTarget = target;
+                //Get distance to gext target
                 distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
                 prevDistanceReached = distanceToTarget;
+                //Reward agent based on time taked to reach checkpoint
                 AddReward(2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000));
                 reward += 2000 + Mathf.Clamp(10000 / (Time.time - timeTargetReached), 0, 6000);
                 rewardTime = Time.time;
@@ -194,7 +229,11 @@ public class ObstacleCourseAgent : Agent
                 timeTargetReached = Time.time;
                 Debug.Log(checkPointsReached);
             }
+            //If plane takes too long to reach a new checkpoint, treat it as being stuck and having crashed
+            if (Time.time - timeTargetReached > 20)
+                hasCrashed = true;
 
+            //Reward and reset plane if it reaches end of course
             if(reachedEnd)
             {
                 AddReward(20000);
@@ -202,8 +241,11 @@ public class ObstacleCourseAgent : Agent
                 rewardTime = Time.time;
 
                 numReachedEnd.reachEndAmount++;
+                ResetPlane();
                 EndEpisode();
             }
+            //Reset plane if it has crashed
+            //Commented out code used for training
             else if(hasCrashed /*|| transform.position.y >= 600 || Vector3.Magnitude(target.transform.position - transform.position) > 1000 || Time.time - rewardTime > 10 || Time.time - timeGotCloser > 10 || reward < -10*/ /*|| Time.time - timeTargetReached > 20*/)
             {
                 //if(checkPointsReached != 0)
@@ -221,22 +263,25 @@ public class ObstacleCourseAgent : Agent
                 rewardTime = Time.time;
                 timeTargetReached = Time.time;
                 timeGotCloser = Time.time;
+                ResetPlane();
                 EndEpisode();
             }
         }
-        else if( Time.time < 2)
+        else if( Time.time < 10)
         {
             rb.velocity = Vector3.zero;
         }
         else
         {
-            rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * minVelocity;
+            rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized;
         }
     }
     public override void Heuristic(float[] actionsOut)
     {
+        //Reset avoidance direction
         Vector3 avoidanceDirection = Vector3.zero;
         int i = 0;
+        //Add to avoidance force for each sight point, depending on distance and angle
         foreach (Vector3 objPos in sightObservations)
         {
             float angleToPoint = Mathf.Abs(Vector3.Angle(sight.sightDirections[i], transform.TransformDirection(Vector3.forward)));
@@ -245,19 +290,23 @@ public class ObstacleCourseAgent : Agent
             i++;
         }
 
+        //Limit force to the max accelleration
         if (avoidanceDirection.magnitude > maxAcceleration)
             avoidanceDirection = avoidanceDirection.normalized * maxAcceleration;
 
-        
+        //Set seek and avoidance force
         Vector3 avoidanceForce = avoidanceDirection;
         Vector3 seekForce = targetDirection.normalized * maxAcceleration;
 
+        //Set ratio of forces based on avoidance strength
         float avoidanceRatio = avoidanceForce.magnitude / maxAcceleration;
         float seekRatio = 1 - avoidanceRatio;
-        Vector3 desiredDirection = avoidanceForce * avoidanceRatio + seekForce * seekRatio;
 
+        //Combine forces into a single direction and localise
+        Vector3 desiredDirection = avoidanceForce * avoidanceRatio + seekForce * seekRatio;
         Vector3 localDir = transform.InverseTransformDirection(desiredDirection) / maxAcceleration;
 
+        //Set neural net output to localised desired direciton
         actionsOut[0] = localDir.x;
         actionsOut[1] = localDir.y;
         actionsOut[2] = localDir.z;
@@ -267,40 +316,8 @@ public class ObstacleCourseAgent : Agent
     {
         reward = 0;
         timeGotCloser = Time.time;
-        //pathfinding = GetComponent<PlanePathfinding>();
         ResetPlane();
         
-    }
-
-    public void LookAtDirection()
-    {
-        Vector3 direction = rb.velocity;
-        direction.Normalize();
-
-        /* If we have a non-zero direction then look towards that direciton otherwise do nothing */
-        if (direction.sqrMagnitude > 0.001f)
-        {
-            //Vector3 perp = Vector3.Cross(transform.forward, direction);
-            //float dir = Vector3.Dot(perp, transform.up);
-
-            //if (Mathf.Abs(dir) < 0.00005)
-            //{
-            //    body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, 0), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z)) * Time.deltaTime * bodyRotateSpeed);
-            //}
-            //else
-            //{
-            //    if (dir < 0)
-            //    {
-            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(-dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-            //    }
-            //    else
-            //    {
-            //        body.transform.localRotation = Quaternion.Lerp(body.transform.localRotation, Quaternion.Euler(0, 0, Mathf.Clamp(-dir * bodyRotateAmount, -45, 45)), (1 / Mathf.Abs(body.transform.localRotation.eulerAngles.z - Mathf.Clamp(dir * bodyRotateAmount, -45, 45))) * Time.deltaTime * bodyRotateSpeed);
-            //    }
-            //}
-
-            transform.rotation = Quaternion.LookRotation(direction);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -311,29 +328,34 @@ public class ObstacleCourseAgent : Agent
         }
     }
 
+    //Reset all values and place plane back at start of the course
     public void ResetPlane()
     {
+        resetting = true;
         startPos = 1;//Random.Range(0, numCheckPoints);
         targetnumber = startPos;
         target = checkPoints[targetnumber];
         oldTarget = target;
         transform.position = startPositions[startPos].transform.position;
-        transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.rotation = startPositions[startPos].transform.rotation;
-        //cam.transform.position = startPositions[startPos].transform.position - startPositions[startPos].transform.forward * 80 + startPositions[startPos].transform.up * 80;
+        transform.rotation = startPositions[startPos].transform.rotation;       
         checkPointsReached = 0;
 
+        //Increment number of times plane as completed or failed the course as neccessary
         if (hasCrashed)
             numReachedEnd.crashedAmount++;
+
+        if (reachedEnd)
+            numReachedEnd.checkTime = timer.time;
+
         reachedEnd = false;
         hasCrashed = false;
         timer.time = 0;
-        //body.transform.rotation = Quaternion.identity;
         distanceToTarget = Vector3.Magnitude(target.transform.position - transform.position);
         prevDistanceReached = distanceToTarget;
         prevDistance = distanceToTarget;
-        rb.velocity = (target.transform.position - startPositions[startPos].transform.position).normalized * minVelocity;
+        rb.velocity = Vector3.zero;
 
+        //Reset checkpoint data on whether plane has reached it.
         foreach ( GameObject checkPoint in checkPoints)
         {
             if(checkPoint.GetComponentInChildren<CheckPoint>().MLPlaneReachedTarget.Count >= 1)
